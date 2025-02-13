@@ -19,6 +19,7 @@
       "@faded-chapter/feedback": ["libs/feedback/src/index.ts"],
       "@faded-chapter/shared": ["libs/shared/src/index.ts"],
       "@faded-chapter/ui": ["libs/ui/src/index.ts"],
+      "@faded-chapter/user-dashboard": ["libs/user-dashboard/src/index.ts"],
       "@faded-chapter/utils": ["libs/utils/src/index.ts"]
     }
   },
