@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@faded-chapter/shared": ["libs/shared/src/index.ts"],
-      "@faded-chapter/ui": ["libs/ui/src/index.ts"]
+      "@faded-chapter/ui": ["libs/ui/src/index.ts"],
+      "@faded-chapter/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
