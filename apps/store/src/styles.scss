@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import "node_modules/bootstrap/dist/css/bootstrap.min.css";
+// Import Bootstrap Icons CSS in your main JavaScript or SCSS file
+@import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
+/* Light mode (default) */
+body {
+    background-color: #f8f9fa;  /* Light background */
+    color: #212529;  /* Dark text */
+  }
+  
+  body i {
+    color: #212529;  /* Dark icons in light mode */
+  }
+  
+  /* Dark mode */
+  body.dark-mode {
+    background-color: #343a40;  /* Dark background */
+    color: #f8f9fa;  /* Light text */
+  }
+  
+  body.dark-mode i {
+    color: #f8f9fa;  /* Light icons in dark mode */
+  }
+  
+  /* Navbar styling */
+  .navbar-light {
+    background-color: #f8f9fa !important;
+  }
+  
+  .navbar-dark {
+    background-color: #343a40 !important;
+  }

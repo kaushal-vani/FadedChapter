@@ -22,8 +22,11 @@
             "input": "apps/store/public"
           }
         ],
-        "styles": ["apps/store/src/styles.css"],
-        "scripts": []
+        "styles": [
+          "apps/store/src/styles.scss",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
       },
       "configurations": {
         "production": {
