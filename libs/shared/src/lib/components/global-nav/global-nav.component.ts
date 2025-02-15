@@ -9,10 +9,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './global-nav.component.css',
 })
 export class GlobalNavComponent {
-  showSearch = false; // To toggle search box visibility
-  searchQuery = ''; // Bind to the search input field
 
-  toggleSearch(): void {
-    this.showSearch = !this.showSearch; // Toggle visibility of the search box
   }
-}

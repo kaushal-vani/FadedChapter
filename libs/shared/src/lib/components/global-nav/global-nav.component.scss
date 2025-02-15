@@ -9,7 +9,6 @@
     font-size: 14px; /* Optional, can reduce font size to make it look slimmer */
   }
 
-  .search-input {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    opacity: 1;
+  .sub-navbar {
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
