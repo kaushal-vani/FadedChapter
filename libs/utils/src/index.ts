@@ -1,1 +1,1 @@
-export * from './lib/utils/utils.component';
+export * from './lib/components/theme/theme.component'

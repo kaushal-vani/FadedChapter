@@ -1,0 +1,28 @@
+.toggle-mode-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Makes it round */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #626263; /* Light mode background */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    /* Dark mode styling */
+    body.dark-mode & {
+      background-color: #cacdd0;
+    }
+  }
+
+  .bi{
+  &-sun{
+    color: #fcdb06;
+  };
+
+  &-moon{
+    color: #2f90d1;
+  }
+}
