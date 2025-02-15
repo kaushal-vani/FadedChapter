@@ -1,0 +1,15 @@
+.navbar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .navbar-nav .nav-item .nav-link {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 14px; /* Optional, can reduce font size to make it look slimmer */
+  }
+
+  .search-input {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+  }
