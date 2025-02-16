@@ -1,0 +1,76 @@
+<body>
+  <div class="container-wrapper">
+    <div class="size-guide-container">
+      <h2>Size Guide</h2>
+
+      <!-- Toggle Buttons -->
+      <div class="toggle-buttons">
+        <button
+          (click)="toggleSizeGuide('men')"
+          [class.active]="selectedGuide === 'men'"
+        >
+          Men
+        </button>
+        <button
+          (click)="toggleSizeGuide('women')"
+          [class.active]="selectedGuide === 'women'"
+        >
+          Women
+        </button>
+      </div>
+
+      <!-- Size Chart -->
+      <div class="size-table">
+        <h3 *ngIf="selectedGuide === 'men'">Men's Size Chart</h3>
+        <h3 *ngIf="selectedGuide === 'women'">Women's Size Chart</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th *ngIf="selectedGuide === 'men'">Chest (in)</th>
+              <th *ngIf="selectedGuide === 'women'">Bust (in)</th>
+              <th>Waist (in)</th>
+              <th>Hip (in)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let size of displayedSizes">
+              <td>{{ size.label }}</td>
+              <td *ngIf="selectedGuide === 'men'">{{ size.chest }}</td>
+              <td *ngIf="selectedGuide === 'women'">{{ size.bust }}</td>
+              <td>{{ size.waist }}</td>
+              <td>{{ size.hip }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Measurement Instructions -->
+      <div class="size-instructions">
+        <h4>How to Measure:</h4>
+        <p>
+          Use a measuring tape and follow these guidelines to determine your
+          size:
+        </p>
+        <ul>
+          <li>
+            <strong>Chest/Bust:</strong> Measure around the fullest part,
+            keeping the tape parallel to the floor.
+          </li>
+          <li>
+            <strong>Waist:</strong> Measure around the narrowest part of your
+            waist.
+          </li>
+          <li>
+            <strong>Hips:</strong> Measure around the widest part of your hips.
+          </li>
+        </ul>
+        <p>
+          <strong>Tip:</strong> If you're between sizes, choose the larger size
+          for a more comfortable fit.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
