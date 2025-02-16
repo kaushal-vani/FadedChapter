@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SlimNavComponent } from './slim-nav.component';
+import { HeroBannerComponent } from './hero-banner.component';
 
-describe('SlimNavComponent', () => {
-  let component: SlimNavComponent;
-  let fixture: ComponentFixture<SlimNavComponent>;
+describe('HeroBannerComponent', () => {
+  let component: HeroBannerComponent;
+  let fixture: ComponentFixture<HeroBannerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SlimNavComponent],
+      imports: [HeroBannerComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SlimNavComponent);
+    fixture = TestBed.createComponent(HeroBannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

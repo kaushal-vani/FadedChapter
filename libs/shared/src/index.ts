@@ -1,9 +1,9 @@
-export * from './lib/components/banner/banner.component';
+// Components
 export * from './lib/components/footer/footer.component';
+export * from './lib/components/hero-banner/hero-banner.component';
 export * from './lib/components/global-nav/global-nav.component';
-export * from './lib/components/slim-nav/slim-nav.component';
 
-
+// Static Content
 export * from './lib/static-content/about-us/about-us.component'
 export * from './lib/static-content/contact-us/contact-us.component'
 export * from './lib/static-content/refund-returns/refund-returns.component'
