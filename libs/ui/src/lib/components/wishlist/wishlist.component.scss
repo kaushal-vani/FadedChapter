@@ -1,0 +1,24 @@
+.wishlist-container {
+    padding: 20px;
+  }
+  
+  .wishlist-item {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  .wishlist-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .wishlist-item button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
