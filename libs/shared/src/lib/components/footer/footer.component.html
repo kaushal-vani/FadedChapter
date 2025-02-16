@@ -1,11 +1,72 @@
 <footer class="footer py-4">
     <div class="container">
-        <!-- Mobile Version: Logo & Social Media Icons -->
+        <!-- Mobile Version: Logo -->
         <div class="row align-items-center d-md-none text-center">
             <div class="col-12">
                 <img src="logos/jordan.png" alt="F" class="img-fluid" style="max-width: 150px;" />
             </div>
-            <div class="col-12 mt-3">
+        </div>
+
+        <!-- Mobile Version: Accordions -->
+        <div class="accordion d-md-none mt-3" id="footerAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Assistance
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    data-bs-parent="#footerAccordion">
+                    <div class="accordion-body">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="/size-guide" class="nav-link text-body">Size Guide</a></li>
+                            <li class="nav-item"><a href="/shipping-payments" class="nav-link text-body">Shipping & Payments</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Company
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#footerAccordion">
+                    <div class="accordion-body">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="/about-us" class="nav-link text-body">About Us</a></li>
+                            <li class="nav-item"><a href="/contact-us" class="nav-link text-body">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Policies
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#footerAccordion">
+                    <div class="accordion-body">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="/refund-returns" class="nav-link text-body">Refund & Returns</a></li>
+                            <li class="nav-item"><a href="/privacy-policy" class="nav-link text-body">Terms & Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Version: Social Media Icons -->
+        <div class="row align-items-center d-md-none text-center mt-3">
+            <div class="col-12">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
                         <a href="#" class="nav-link"><i class="bi bi-facebook"></i></a>
@@ -55,7 +116,7 @@
         <!-- Social Media & Sub-footer (Desktop) -->
         <div class="row d-none d-md-flex mt-4 align-items-center">
             <div class="col-md-6 text-md-start text-center">
-                <p class=" nav-link text-muted">© 2025 Faded Chapter. All rights reserved.</p>
+                <p class="nav-link text-muted">© 2025 Faded Chapter. All rights reserved.</p>
             </div>
             <div class="col-md-6 text-md-end text-center">
                 <ul class="nav justify-content-md-end justify-content-center">
