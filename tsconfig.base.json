@@ -17,6 +17,7 @@
     "paths": {
       "@faded-chapter/auth": ["libs/auth/src/index.ts"],
       "@faded-chapter/feedback": ["libs/feedback/src/index.ts"],
+      "@faded-chapter/pages": ["libs/pages/src/index.ts"],
       "@faded-chapter/shared": ["libs/shared/src/index.ts"],
       "@faded-chapter/ui": ["libs/ui/src/index.ts"],
       "@faded-chapter/user-dashboard": ["libs/user-dashboard/src/index.ts"],
