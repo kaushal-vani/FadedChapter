@@ -7,4 +7,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './hero-banner.component.html',
   styleUrl: './hero-banner.component.scss',
 })
-export class HeroBannerComponent {}
+export class HeroBannerComponent  {
+  heroGif = "logos/banner.gif";  // Placeholder image path
+  heroLink = "/shop-now";
+  heroButtonText = "Shop Now";
+  }

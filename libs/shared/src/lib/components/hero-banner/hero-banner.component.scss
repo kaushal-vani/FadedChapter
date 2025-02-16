@@ -1,0 +1,53 @@
+/* Hero Banner Styles */
+.hero-banner {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;  /* Prevents repeating the GIF */
+    height: 80vh; /* Default height for larger screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+/* Adjust for Tablet and Mobile Views */
+@media (max-width: 1199px) {
+    .hero-banner {
+        height: 40vh; /* Reduced height for tablets */
+    }
+    .hero-banner .btn {
+        font-size: 0.75rem;  /* Smaller button size for tablet */
+        padding: 0.5rem 1.25rem;  /* Adjust padding */
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-banner {
+        height: 30vh;  /* Further reduced height for mobile */
+    }
+    .hero-banner .btn {
+        font-size: 0.5rem;  /* Smaller button size for mobile */
+        padding: 0.5rem 1rem;  /* Adjust padding for mobile */
+    }
+}
+
+/* Vintage Button Styling */
+.hero-banner .btn {
+    background-color: transparent; /* Transparent background for vintage look */
+    color: #0f0f0f; /* Muted brown color */
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid #0f0f0f; /* Border with muted brown color */
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px; /* Rounded button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a vintage look */
+    transition: all 0.3s ease;
+}
+
+.hero-banner .btn:hover {
+    background-color: #0f0f0f; /* Darken background on hover */
+    color: white; /* Change text color to white on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
