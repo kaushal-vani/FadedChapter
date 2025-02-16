@@ -1,0 +1,102 @@
+body {
+  background-color: #f1f1f1;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+// Main container
+.container-wrapper {
+  max-width: 1000px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+}
+
+// Content box design
+.content-box {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: url('/logos/jordan.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.08;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+// Section pointers
+.section-pointer {
+  font-weight: 500;
+  color: #333;
+}
+
+// Paragraphs and list items
+p,
+li {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  position: relative;
+  z-index: 1;
+}
+
+// List styling
+ul {
+  padding-left: 25px;
+
+  li {
+    margin-bottom: 14px;
+    list-style-type: disc;
+  }
+}
+
+// Links
+a {
+  color: #0056b3;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    text-decoration: underline;
+    color: #007bff;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .container-wrapper {
+    padding: 15px;
+  }
+
+  .content-box {
+    padding: 30px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.closing-note {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 30px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
