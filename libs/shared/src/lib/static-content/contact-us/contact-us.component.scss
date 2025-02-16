@@ -1,0 +1,135 @@
+body {
+  background-color: #f1f1f1;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.container-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh; // Ensures the form is vertically centered
+  padding: 20px;
+}
+
+.contact-us-container {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    &.error {
+      border-color: red;
+    }
+  }
+
+  textarea {
+    height: 100px;
+    resize: none;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #333;
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.3s;
+  cursor: pointer;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  &.error {
+    border-color: red;
+  }
+}
+
+.form-group {
+  select {
+    appearance: none; // Removes default styles (especially on Safari)
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>')
+      no-repeat right 10px center;
+    background-size: 16px;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+a {
+  color: #0056b3;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    text-decoration: underline;
+    color: #007bff;
+  }
+}
