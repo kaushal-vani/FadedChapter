@@ -1,0 +1,1 @@
+export type FitType = 'Regular' | 'Relaxed' | 'Boxy';
