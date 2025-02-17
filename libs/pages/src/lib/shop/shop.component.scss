@@ -1,18 +1,48 @@
-.filter-btn {
-    width: 36px;  /* Make it a perfect circle */
-    height: 36px;
-    border: 2px solid black;  /* Black outline */
-    border-radius: 50%;  /* Makes it circular */
-    background-color: white;  /* Default background */
-    color: black;  /* Default icon color */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    transition: all 0.3s ease-in-out;
+/* Shop Header Styling */
+.shop-header {
+  padding: 15px 30px;
+  background-color: #f8f9fa; /* Light background for the header */
+  border-bottom: 1px solid #dee2e6; /* Border to separate header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Button Styling */
+.filter-btn,
+.sort-btn {
+  width: 36px; /* Make it a perfect circle */
+  height: 36px;
+  border: 2px solid black; /* Black outline */
+  border-radius: 50%; /* Makes it circular */
+  background-color: white; /* Default background */
+  color: black; /* Default icon color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.filter-btn:hover,
+.sort-btn:hover {
+  background-color: black; /* Inverted background */
+  color: white; /* Inverted icon color */
+}
+
+/* Responsive adjustments for mobile and tablet */
+@media (max-width: 768px) {
+  .shop-header {
+    padding: 10px 20px; /* Reduce padding for smaller screens */
+    justify-content: space-between;
   }
-  
-  .filter-btn:hover {
-    background-color: black;  /* Inverted background */
-    color: white;  /* Inverted icon color */
+
+  .filter-btn,
+  .sort-btn {
+    font-size: 20px; /* Reduce icon size for mobile */
+    width: 30px; /* Smaller button size */
+    height: 30px; /* Adjust height to maintain circular shape */
   }
+}
