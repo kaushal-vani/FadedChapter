@@ -1,9 +1,10 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-footer',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css',
 })

@@ -8,6 +8,7 @@ export * from './lib/models/wishlist/wishlist.interface';
 
 // Service
 export * from './lib/services/wishlist/wishlist.service'
+export * from './lib/services/cart/cart.service'
 
 // Static Content
 export * from './lib/static-content/about-us/about-us.component'
