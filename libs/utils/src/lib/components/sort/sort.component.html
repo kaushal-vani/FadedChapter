@@ -1,0 +1,34 @@
+<!-- Offcanvas Sidebar for Sort -->
+<div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="offcanvasSort"
+     aria-labelledby="offcanvasSortLabel" #offcanvasSort>
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasSortLabel">Sort Options</h5>
+    <button type="button" class="btn-close" (click)="closeSort()" aria-label="Close"></button>
+  </div>
+  
+  <div class="offcanvas-body">
+    
+    <!-- SORT BY -->
+    <div class="sort-section">
+      <h6 class="sort-title">Sort By</h6>
+      <div class="sort-options">
+        <label><input type="radio" name="sortBy" value="priceLowToHigh"> Price: Low to High</label>
+        <label><input type="radio" name="sortBy" value="priceHighToLow"> Price: High to Low</label>
+        <label><input type="radio" name="sortBy" value="newArrivals"> New Arrivals</label>
+        <label><input type="radio" name="sortBy" value="bestSelling"> Best Selling</label>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SORT ORDER -->
+    <div class="sort-section">
+      <h6 class="sort-title">Sort Order</h6>
+      <div class="sort-options">
+        <label><input type="radio" name="sortOrder" value="ascending"> Ascending</label>
+        <label><input type="radio" name="sortOrder" value="descending"> Descending</label>
+      </div>
+    </div>
+
+  </div> <!-- End Offcanvas Body -->
+</div>
