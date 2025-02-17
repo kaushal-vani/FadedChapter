@@ -4,7 +4,7 @@ export const ProductMock: Product[] = [
     {
       id: '1',
       name: 'Vintage Angel Tee',
-      image: 'products/angel.png',
+      image: 'products/angel.jpg',
       description: 'A classic black tee with a vintage touch.',
       composition: '100% Cotton',
       price: 29.99,
@@ -21,7 +21,7 @@ export const ProductMock: Product[] = [
     {
       id: '2',
       name: 'Relaxed Cupid Hoodie',
-      image: 'products/hoodie.png',
+      image: 'products/hoodie.jpg',
       description: 'A warm and cozy hoodie for everyday wear.',
       composition: '80% Cotton, 20% Polyester',
       price: 49.99,
@@ -38,7 +38,7 @@ export const ProductMock: Product[] = [
     {
       id: '3',
       name: 'Trex Tee',
-      image: 'products/trex.png',
+      image: 'products/trex.jpg',
       description: 'A trendy boxy tee in crisp white.',
       composition: '100% Organic Cotton',
       price: 34.99,
@@ -55,7 +55,7 @@ export const ProductMock: Product[] = [
     {
       id: '4',
       name: 'Blue Denim Shirt',
-      image: 'products/polo.png',
+      image: 'products/polo.jpg',
       description: 'A stylish denim shirt for casual outings.',
       composition: '100% Denim Cotton',
       price: 59.99,
@@ -72,7 +72,7 @@ export const ProductMock: Product[] = [
     {
       id: '5',
       name: 'Oversized Graphic Tee',
-      image: 'products/metro.png',
+      image: 'products/metro.jpg',
       description: 'An oversized tee with a bold graphic print.',
       composition: '100% Cotton',
       price: 39.99,
