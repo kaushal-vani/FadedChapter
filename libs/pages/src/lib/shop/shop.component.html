@@ -10,5 +10,9 @@
   </button>
 </div>
 
+<div class="product-grid">
+  <lib-product-card *ngFor="let product of products" [product]="product"></lib-product-card>
+</div>
+
 <lib-filter></lib-filter>
 <lib-sort></lib-sort>

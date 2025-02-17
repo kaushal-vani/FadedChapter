@@ -73,10 +73,7 @@ small {
   }
 }
 
-.footer .section-title {
-  text-align: left; /* Align text to the left */
-  
-  &::after {
-      margin-left: 10px; /* Move the underline to the left */
-  }
+.footer .section-title , .footer .nav-item{
+  text-align: center; /* Align text to the left */
+
 }
