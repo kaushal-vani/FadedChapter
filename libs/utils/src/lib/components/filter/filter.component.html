@@ -1,0 +1,69 @@
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="offcanvasFilter"
+     aria-labelledby="offcanvasFilterLabel" #offcanvasFilter>
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasFilterLabel">Filters</h5>
+    <button type="button" class="btn-close" (click)="closeFilter()" aria-label="Close"></button>
+  </div>
+  
+  <div class="offcanvas-body">
+    
+    <!-- CATEGORY -->
+    <div class="filter-section">
+      <h6 class="filter-title">Category</h6>
+      <div class="filter-options">
+        <label><input type="checkbox"> MEN (109)</label>
+        <label><input type="checkbox"> UNISEX (23)</label>
+        <label><input type="checkbox"> WOMEN (3)</label>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- PRODUCT TYPE -->
+    <div class="filter-section">
+      <h6 class="filter-title">Product Type</h6>
+      <div class="filter-options">
+        <label><input type="checkbox"> BOTTOMS (6)</label>
+        <label><input type="checkbox"> DRESSES</label>
+        <label><input type="checkbox"> HOODIES AND SWEATSHIRTS (11)</label>
+        <label><input type="checkbox"> OUTERWEAR (2)</label>
+        <label><input type="checkbox"> SHIRTS (6)</label>
+        <label><input type="checkbox"> SWIMWEAR</label>
+        <label><input type="checkbox"> TEES (76)</label>
+        <label><input type="checkbox"> TOPS</label>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SIZE -->
+    <div class="filter-section">
+      <h6 class="filter-title">Size</h6>
+      <div class="filter-options">
+        <label><input type="checkbox"> L (98)</label>
+        <label><input type="checkbox"> M (98)</label>
+        <label><input type="checkbox"> ONESIZE (6)</label>
+        <label><input type="checkbox"> One size (5)</label>
+        <label><input type="checkbox"> S (98)</label>
+        <label><input type="checkbox"> XL (97)</label>
+        <label><input type="checkbox"> XS (92)</label>
+        <label><input type="checkbox"> XXL (92)</label>
+        <label><input type="checkbox"> XXXL (87)</label>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- FIT TYPE -->
+    <div class="filter-section">
+      <h6 class="filter-title">Fit Type</h6>
+      <div class="filter-options">
+        <label><input type="checkbox"> BOXY (19)</label>
+        <label><input type="checkbox"> REGULAR (6)</label>
+        <label><input type="checkbox"> RELAXED (55)</label>
+      </div>
+    </div>
+
+  </div> <!-- End Offcanvas Body -->
+</div>
