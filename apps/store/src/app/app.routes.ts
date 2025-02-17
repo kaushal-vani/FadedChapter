@@ -1,7 +1,7 @@
 import { ExtraOptions, Route } from '@angular/router';
-import { HomeComponent } from '@faded-chapter/pages';
+import { HomeComponent, ShopComponent } from '@faded-chapter/pages';
 import { AboutUsComponent, ContactUsComponent, RefundReturnsComponent, ShippingPaymentsComponent, SizeGuideComponent, TermsPrivacyComponent } from '@faded-chapter/shared';
-import { WishlistComponent } from '@faded-chapter/ui';
+import { CartComponent, WishlistComponent } from '@faded-chapter/ui';
 
 export const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'top',  // Scroll to the top when navigating to a new route
@@ -12,8 +12,10 @@ export const routerOptions: ExtraOptions = {
 export const appRoutes: Route[] = [
   //User Features
   {path:'wishlist', component: WishlistComponent},
+  {path:'cart', component: CartComponent},
   //Pages
   {path:'home', component: HomeComponent},
+  {path:'shop', component: ShopComponent},
   // Footer Components
   { path: 'size-guide', component: SizeGuideComponent },
   { path: 'shipping-payments', component: ShippingPaymentsComponent },
