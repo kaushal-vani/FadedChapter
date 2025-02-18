@@ -1,0 +1,18 @@
+.nav-link { /* This now styles the nav links in this component */
+  color: #ccc; /* Lighter grey text */
+  text-decoration: none;
+  position: relative; 
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.nav-link.active {
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 4px; 
+}
+
+.nav-link:hover {
+  color: #999; /* Your desired hover color */
+  text-decoration: underline;
+  text-underline-offset: 4px; 
+}
