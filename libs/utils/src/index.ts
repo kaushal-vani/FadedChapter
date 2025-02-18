@@ -3,8 +3,8 @@ export * from './lib/components/filter/filter.component';
 export * from './lib/components/sort/sort.component';
 
 //Interface
-export * from './lib/models/product/product.interface';
 export * from './lib/models/filter/filter.interface';
+export * from './lib/models/product/product.interface';
 
 //Type
 export * from './lib/types/category/category.type';
