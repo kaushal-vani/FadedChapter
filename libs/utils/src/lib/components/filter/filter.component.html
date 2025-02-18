@@ -7,62 +7,60 @@
   </div>
   
   <div class="offcanvas-body">
-    
+
     <!-- CATEGORY -->
     <div class="filter-section">
       <h6 class="filter-title">Category</h6>
       <div class="filter-options">
-        <label><input type="checkbox"> MEN</label>
-        <label><input type="checkbox"> UNISEX</label>
-        <label><input type="checkbox"> WOMEN</label>
+        <label><input type="checkbox" (change)="toggleFilter('category', 'Men')"> MEN</label>
+        <label><input type="checkbox" (change)="toggleFilter('category', 'Unisex')"> UNISEX</label>
+        <label><input type="checkbox" (change)="toggleFilter('category', 'Women')"> WOMEN</label>
       </div>
     </div>
-
-    <hr>
-
+    
     <!-- PRODUCT TYPE -->
     <div class="filter-section">
       <h6 class="filter-title">Product Type</h6>
       <div class="filter-options">
-        <label><input type="checkbox"> BOTTOMS</label>
-        <label><input type="checkbox"> DRESSES</label>
-        <label><input type="checkbox"> HOODIES AND SWEATSHIRTS</label>
-        <label><input type="checkbox"> OUTERWEAR</label>
-        <label><input type="checkbox"> SHIRTS</label>
-        <label><input type="checkbox"> SWIMWEAR</label>
-        <label><input type="checkbox"> TEES</label>
-        <label><input type="checkbox"> TOPS</label>
+        <label><input type="checkbox" (change)="toggleFilter('productType', 'Tees')"> TEES</label>
+        <label><input type="checkbox" (change)="toggleFilter('productType', 'Hoodies')"> HOODIES</label>
+        <label><input type="checkbox" (change)="toggleFilter('productType', 'Shirt')"> SHIRTS</label>
+        <label><input type="checkbox" (change)="toggleFilter('productType', 'Polo')"> POLO</label>
       </div>
     </div>
-
-    <hr>
-
+    
     <!-- SIZE -->
     <div class="filter-section">
       <h6 class="filter-title">Size</h6>
       <div class="filter-options">
-        <label><input type="checkbox"> L</label>
-        <label><input type="checkbox"> M</label>
-        <label><input type="checkbox"> ONESIZE</label>
-        <label><input type="checkbox"> S</label>
-        <label><input type="checkbox"> XL</label>
-        <label><input type="checkbox"> XS</label>
-        <label><input type="checkbox"> XXL</label>
-        <label><input type="checkbox"> XXXL</label>
+        <label><input type="checkbox" (change)="toggleFilter('size', 'S')"> S</label>
+        <label><input type="checkbox" (change)="toggleFilter('size', 'M')"> M</label>
+        <label><input type="checkbox" (change)="toggleFilter('size', 'L')"> L</label>
+        <label><input type="checkbox" (change)="toggleFilter('size', 'XL')"> XL</label>
+        <label><input type="checkbox" (change)="toggleFilter('size', 'XXL')"> XXL</label>
+        <label><input type="checkbox" (change)="toggleFilter('size', 'XXXL')"> XXXL</label>
       </div>
     </div>
-
-    <hr>
-
+    
     <!-- FIT TYPE -->
     <div class="filter-section">
       <h6 class="filter-title">Fit Type</h6>
       <div class="filter-options">
-        <label><input type="checkbox"> BOXY</label>
-        <label><input type="checkbox"> REGULAR</label>
-        <label><input type="checkbox"> RELAXED</label>
+        <label><input type="checkbox" (change)="toggleFilter('fitType', 'Regular')"> REGULAR</label>
+        <label><input type="checkbox" (change)="toggleFilter('fitType', 'Relaxed')"> RELAXED</label>
+        <label><input type="checkbox" (change)="toggleFilter('fitType', 'Boxy')"> BOXY</label>
       </div>
     </div>
-
+    
+    <!-- COLOR -->
+    <div class="filter-section">
+      <h6 class="filter-title">Color</h6>
+      <div class="filter-options">
+        <label><input type="checkbox" (change)="toggleFilter('color', 'Black')"> Black</label>
+        <label><input type="checkbox" (change)="toggleFilter('color', 'White')"> White</label>
+        <label><input type="checkbox" (change)="toggleFilter('color', 'Red')"> Red</label>
+        <label><input type="checkbox" (change)="toggleFilter('color', 'Blue')"> Blue</label>
+      </div>
+    </div>
   </div> <!-- End Offcanvas Body -->
 </div>
