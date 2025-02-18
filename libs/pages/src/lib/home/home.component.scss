@@ -1,18 +1,23 @@
-.nav-link { /* This now styles the nav links in this component */
-  color: #ccc; /* Lighter grey text */
+.home-nav {
+  background-color: #f1f1f1 !important; // Background color
+}
+
+.nav-link {
+  color: black !important; // Default text color
   text-decoration: none;
-  position: relative; 
-  transition: color 0.3s ease; /* Smooth color transition */
+  position: relative;
+  transition: color 0.3s ease; // Smooth color transition
 }
 
 .nav-link.active {
-  color: white;
+  color: black !important; 
+  font-weight: 800;// Active state text color
   text-decoration: underline;
-  text-underline-offset: 4px; 
+  text-underline-offset: 4px;
 }
 
 .nav-link:hover {
-  color: #999; /* Your desired hover color */
+  color: #333 !important; // Darker shade for hover effect
   text-decoration: underline;
-  text-underline-offset: 4px; 
+  text-underline-offset: 4px;
 }
