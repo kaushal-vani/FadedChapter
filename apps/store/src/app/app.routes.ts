@@ -1,5 +1,5 @@
 import { ExtraOptions, Route } from '@angular/router';
-import { CollaborationsComponent, HomeComponent, NewArrivalsComponent, ShopComponent } from '@faded-chapter/pages';
+import { AccessoriesComponent, CollaborationsComponent, HomeComponent, NewArrivalsComponent, ShopComponent } from '@faded-chapter/pages';
 import { AboutUsComponent, ContactUsComponent, RefundReturnsComponent, ShippingPaymentsComponent, SizeGuideComponent, TermsPrivacyComponent } from '@faded-chapter/shared';
 import { CartComponent, WishlistComponent } from '@faded-chapter/ui';
 
@@ -11,20 +11,21 @@ export const routerOptions: ExtraOptions = {
 
 export const appRoutes: Route[] = [
   //User Features
-  {path:'wishlist', component: WishlistComponent},
   {path:'cart', component: CartComponent},
+  {path:'wishlist', component: WishlistComponent},
   //Pages
-  {path:'home', component: HomeComponent},
-  {path:'shop', component: ShopComponent},
-  {path:'new-arrivals', component: NewArrivalsComponent},
+  {path:'accessories', component: AccessoriesComponent},
   {path:'collaboration', component: CollaborationsComponent},
+  {path:'home', component: HomeComponent},
+  {path:'new-arrivals', component: NewArrivalsComponent},
+  {path:'shop', component: ShopComponent},
   // Footer Components
-  { path: 'size-guide', component: SizeGuideComponent },
-  { path: 'shipping-payments', component: ShippingPaymentsComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'refund-returns', component: RefundReturnsComponent },
   { path: 'privacy-policy', component: TermsPrivacyComponent },
+  { path: 'refund-returns', component: RefundReturnsComponent },
+  { path: 'shipping-payments', component: ShippingPaymentsComponent },
+  { path: 'size-guide', component: SizeGuideComponent },
   // Wild Card Routing
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
