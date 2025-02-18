@@ -40,3 +40,17 @@ a {
     font-size: 1.5rem;
   }
 }
+
+.accordion-button:not(.collapsed) {
+  background-color: #dedede !important; /* Change this to your preferred color */
+  color: #000 !important; /* Text color */
+}
+
+.accordion-button:not(.collapsed):focus {
+  box-shadow: none !important; /* Removes default Bootstrap focus shadow */
+}
+
+.accordion-button:hover {
+  background-color: #f1f1f1 !important; /* Slightly lighter shade for hover */
+  color: #000
+}
