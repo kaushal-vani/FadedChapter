@@ -4,4 +4,4 @@ export type SortOption =
 | 'Price: Low to High' 
 | 'Price: High to Low' 
 | 'New Arrivals' 
-| 'Best Selling';
+| 'In Stock';
