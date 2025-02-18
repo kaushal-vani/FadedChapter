@@ -1,5 +1,5 @@
 import { ExtraOptions, Route } from '@angular/router';
-import { CollaborationsComponent, HomeComponent, ShopComponent } from '@faded-chapter/pages';
+import { CollaborationsComponent, HomeComponent, NewArrivalsComponent, ShopComponent } from '@faded-chapter/pages';
 import { AboutUsComponent, ContactUsComponent, RefundReturnsComponent, ShippingPaymentsComponent, SizeGuideComponent, TermsPrivacyComponent } from '@faded-chapter/shared';
 import { CartComponent, WishlistComponent } from '@faded-chapter/ui';
 
@@ -16,6 +16,7 @@ export const appRoutes: Route[] = [
   //Pages
   {path:'home', component: HomeComponent},
   {path:'shop', component: ShopComponent},
+  {path:'new-arrivals', component: NewArrivalsComponent},
   {path:'collaboration', component: CollaborationsComponent},
   // Footer Components
   { path: 'size-guide', component: SizeGuideComponent },
