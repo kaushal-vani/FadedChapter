@@ -17,8 +17,10 @@ export interface Product {
   size: Size;
   fitType: FitType;
   color: Color;
-  isNewArrival: boolean;
-  isBestSelling: boolean;
+  isNewArrival?: boolean;
+  isBestSelling?: boolean;
+  isFeatured?: boolean;
+  isCollaboration?:boolean;
   discountPercentage?: number;
   rating?: number;
 }
