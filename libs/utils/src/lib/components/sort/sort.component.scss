@@ -31,3 +31,33 @@
   .offcanvas-body {
     padding: 15px;
   }
+
+
+  /* Style for the Apply Sort button */
+  .square-button {
+    width: 100%;
+    padding: 10px 0;  /* Adjust padding for better spacing */
+    background: transparent;
+    border: 2px solid #000;  /* Set border color */
+    color: #000;  /* Set text color */
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;  /* Smooth transition for hover effects */
+    border-radius: 0;
+    text-align: center;
+  }
+  
+  /* Hover effect for inverse colors */
+  .square-button:hover {
+    background-color: #000;  /* Inverse background */
+    color: #fff;  /* Inverse text color */
+    border-color: black !important;
+    font-weight: bold; /* Inverse border */
+  }
+  
+  /* Focus and active state for accessibility */
+  .square-button:focus, button:active {
+    outline: none;  /* Remove outline on focus */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);  /* Subtle focus shadow */
+  }

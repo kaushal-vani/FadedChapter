@@ -8,27 +8,44 @@
   
   <div class="offcanvas-body">
     
-    <!-- SORT BY -->
+    <!-- Sort By -->
     <div class="sort-section">
       <h6 class="sort-title">Sort By</h6>
       <div class="sort-options">
-        <label><input type="radio" name="sortBy" value="priceLowToHigh"> Price: Low to High</label>
-        <label><input type="radio" name="sortBy" value="priceHighToLow"> Price: High to Low</label>
-        <label><input type="radio" name="sortBy" value="newArrivals"> New Arrivals</label>
-        <label><input type="radio" name="sortBy" value="bestSelling"> Best Selling</label>
+        <label>
+          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="Price: Low to High">
+          Price: Low to High
+        </label>
+        <label>
+          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="Price: High to Low">
+          Price: High to Low
+        </label>
+        <label>
+          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="New Arrivals">
+          New Arrivals
+        </label>
+        <label>
+          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="In Stock">
+          In Stock
+        </label>
       </div>
     </div>
-
+    
     <hr>
-
-    <!-- SORT ORDER -->
-    <div class="sort-section">
+    
+    <!-- Sort Order (Only show for New Arrivals or In Stock) -->
+    <div class="sort-section" *ngIf="selectedSortOption === 'New Arrivals' || selectedSortOption === 'In Stock'">
       <h6 class="sort-title">Sort Order</h6>
       <div class="sort-options">
-        <label><input type="radio" name="sortOrder" value="ascending"> Ascending</label>
-        <label><input type="radio" name="sortOrder" value="descending"> Descending</label>
+        <label>
+          <input type="radio" name="sortOrder" [(ngModel)]="selectedSortOrder" value="Ascending"> Ascending
+        </label>
+        <label>
+          <input type="radio" name="sortOrder" [(ngModel)]="selectedSortOrder" value="Descending"> Descending
+        </label>
       </div>
     </div>
-
+    
+    <button class="btn btn-outline-dark square-button" (click)="applySort()">Apply Sort</button>
   </div> <!-- End Offcanvas Body -->
 </div>
