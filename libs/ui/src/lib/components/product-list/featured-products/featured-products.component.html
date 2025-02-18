@@ -1,3 +1,11 @@
 <div class="product-grid">
+  <!-- Skeleton Loader -->
+  <ng-container *ngIf="isLoading">
+    <lib-product-card-skeleton-loader *ngFor="let _ of [].constructor(skeletonCount)"></lib-product-card-skeleton-loader>
+  </ng-container>
+
+  <!-- Actual Products -->
+  <ng-container *ngIf="!isLoading">
     <lib-product-card *ngFor="let product of featuredProducts" [product]="product"></lib-product-card>
-  </div>
+  </ng-container>
+</div>
