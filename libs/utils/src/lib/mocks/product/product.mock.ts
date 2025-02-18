@@ -34,7 +34,7 @@ export const ProductMock: Product[] = [
     color: 'Red',
     isNewArrival: false,
     isBestSelling: true,
-    isFeatured: true,
+    isFeatured: false,
     rating: 4.8,
   },
   {
@@ -123,7 +123,7 @@ export const ProductMock: Product[] = [
     fitType: 'Relaxed',
     color: 'Red',
     isNewArrival: false,
-    isBestSelling: true,
+    isBestSelling: false,
     isFeatured: true,
     rating: 4.8,
   },
