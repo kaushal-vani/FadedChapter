@@ -13,127 +13,110 @@ import { ProductCardSkeletonLoaderComponent } from '@faded-chapter/shared';
 export class ShopComponent implements OnInit {
   products: Product[] = ProductMock;
   filteredProducts: Product[] = [...this.products];
-  skeletonCountArray: number[] = [];  // To hold the count of skeleton loaders
-  isLoading = true;  // Controls loading state (starts as true for initial load)
+  skeletonCountArray: number[] = []; // Skeleton loader placeholders
+  isLoading = true; // Initial loading state
+
   @ViewChild(FilterComponent) filterComponent!: FilterComponent;
   @ViewChild(SortComponent) sortComponent!: SortComponent;
 
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    // Ensure skeleton loader shows initially
-    this.isLoading = true; // Start loader during initial load
-    this.filteredProducts = this.products; // Set initial filtered products
+    this.isLoading = true;
+    this.filteredProducts = [...this.products];
 
-    // Simulate async load delay for initial load
     setTimeout(() => {
-      this.updateSkeletonCount(); // Update skeleton count for the loader
-      this.isLoading = false; // Stop loader after a delay
-      this.cdRef.detectChanges(); // Manually trigger change detection to update the view
-    }, 1000);  // Simulate a small delay, you can adjust this value
+      this.updateSkeletonCount();
+      this.isLoading = false;
+      this.cdRef.detectChanges();
+    }, 1000);
 
-    // Update skeleton count for initial display
     this.updateSkeletonCount();
   }
 
   updateSkeletonCount(): void {
-    const defaultSkeletonCount = 8;  // Set a fixed number of skeletons to show
-    this.skeletonCountArray = new Array(defaultSkeletonCount).fill(0);  // Fill with dummy values to simulate skeletons
+    const defaultSkeletonCount = 8;
+    this.skeletonCountArray = new Array(defaultSkeletonCount).fill(0);
   }
 
   openFilter(): void {
-    if (this.filterComponent) {
-      this.filterComponent.openFilter();
-    } else {
-      console.error('FilterComponent is not initialized yet');
-    }
+    this.filterComponent?.openFilter();
   }
 
   openSort(): void {
-    if (this.sortComponent) {
-      this.sortComponent.openSort();
-    } else {
-      console.error('SortComponent is not initialized yet');
-    }
+    this.sortComponent?.openSort();
   }
 
   applyFilters(): void {
-    this.isLoading = true;  // Show loader when filters are applied
+    this.isLoading = true;
 
-    setTimeout(() => { // Simulate async filtering delay
+    setTimeout(() => {
       this.filteredProducts = this.products.filter((product) => {
         let matches = true;
+        const filters = this.filterComponent.selectedFilters;
 
-        // Apply each selected filter here
-        if (this.filterComponent.selectedFilters.category && this.filterComponent.selectedFilters.category.length) {
-          matches = matches && this.filterComponent.selectedFilters.category.includes(product.category);
+        if (filters.category?.length) {
+          matches = matches && filters.category.includes(product.category);
         }
-        if (this.filterComponent.selectedFilters.productType && this.filterComponent.selectedFilters.productType.length) {
-          matches = matches && this.filterComponent.selectedFilters.productType.includes(product.productType);
+        if (filters.productType?.length) {
+          matches = matches && filters.productType.includes(product.productType);
         }
-        if (this.filterComponent.selectedFilters.size && this.filterComponent.selectedFilters.size.length) {
-          matches = matches && this.filterComponent.selectedFilters.size.some(size => product.size.includes(size));
+        if (filters.size?.length) {
+          matches = matches && filters.size.some(
+            (selectedSize) => product.size.some((s) => s.size === selectedSize)
+          );
         }
-        if (this.filterComponent.selectedFilters.fitType && this.filterComponent.selectedFilters.fitType.length) {
-          matches = matches && this.filterComponent.selectedFilters.fitType.includes(product.fitType);
+        if (filters.fitType?.length) {
+          matches = matches && filters.fitType.includes(product.fitType);
         }
-        if (this.filterComponent.selectedFilters.color && this.filterComponent.selectedFilters.color.length) {
-          matches = matches && this.filterComponent.selectedFilters.color.includes(product.color);
+        if (filters.color?.length) {
+          matches = matches && filters.color.includes(product.color);
         }
-        if (typeof this.filterComponent.selectedFilters.inStock === 'boolean') {
-          matches = matches && product.inStock === this.filterComponent.selectedFilters.inStock;
+        if (typeof filters.inStock === 'boolean') {
+          matches = matches && product.inStock === filters.inStock;
         }
-        if (this.filterComponent.selectedFilters.priceRange) {
-          const { min, max } = this.filterComponent.selectedFilters.priceRange;
+        if (filters.priceRange) {
+          const { min, max } = filters.priceRange;
           matches = matches && product.price >= min && product.price <= max;
         }
-        if (this.filterComponent.selectedFilters.discountOnly) {
+        if (filters.discountOnly) {
           matches = matches && product.discountPercentage != null && product.discountPercentage > 0;
         }
 
         return matches;
       });
 
-      // After applying filters, update skeleton count and stop loading
       this.updateSkeletonCount();
-      this.isLoading = false;  // Stop loading after filtering
-    }, 1000);  // Simulate async delay (adjust this as necessary)
+      this.isLoading = false;
+    }, 1000);
   }
 
   applySort(sortData: { sortOption: string; sortOrder: string }): void {
     const { sortOption, sortOrder } = sortData;
-    this.isLoading = true;  // Show loader when sorting is applied
+    this.isLoading = true;
 
-    setTimeout(() => { // Simulate async sorting delay
-      // Sorting logic for "In Stock"
-      if (sortOption === 'In Stock') {
-        this.filteredProducts = this.filteredProducts.sort((a, b) => {
-          if (a.inStock && !b.inStock) return -1; // a comes first if in stock, b comes second
-          if (!a.inStock && b.inStock) return 1; // b comes first if in stock, a comes second
-          return 0;
-        });
-      }
-      // Sorting by "Price: Low to High"
-      else if (sortOption === 'Price: Low to High') {
-        this.filteredProducts = this.filteredProducts.sort((a, b) => a.price - b.price);
-      }
-      // Sorting by "Price: High to Low"
-      else if (sortOption === 'Price: High to Low') {
-        this.filteredProducts = this.filteredProducts.sort((a, b) => b.price - a.price);
-      }
-      // Sorting by "New Arrivals"
-      else if (sortOption === 'New Arrivals') {
-        this.filteredProducts = this.filteredProducts.sort((a) => (a.isNewArrival ? -1 : 1));
+    setTimeout(() => {
+      switch (sortOption) {
+        case 'In Stock':
+          this.filteredProducts = this.filteredProducts.sort((a, b) => Number(b.inStock) - Number(a.inStock));
+          break;
+        case 'Price: Low to High':
+          this.filteredProducts = this.filteredProducts.sort((a, b) => a.price - b.price);
+          break;
+        case 'Price: High to Low':
+          this.filteredProducts = this.filteredProducts.sort((a, b) => b.price - a.price);
+          break;
+        case 'New Arrivals':
+          this.filteredProducts = this.filteredProducts.sort((a, b) => Number(b.isNewArrival) - Number(a.isNewArrival));
+          break;
       }
 
-      // Apply sort order ("Ascending" or "Descending")
       if (sortOrder === 'Descending') {
-        this.filteredProducts = this.filteredProducts.reverse();  // Reverse the array if "Descending"
+        this.filteredProducts.reverse();
       }
 
-      // After applying sort, update skeleton count and stop loading
       this.updateSkeletonCount();
-      this.isLoading = false;  // Stop loading after sorting
-    }, 1000);  // Simulate async delay (adjust this as necessary)
+      this.isLoading = false;
+    }, 1000);
   }
 }

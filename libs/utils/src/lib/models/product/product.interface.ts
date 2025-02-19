@@ -15,7 +15,7 @@ export interface Product {
   inStock: boolean;
   category: Category;
   productType: ProductType;
-  size: Size[];
+  size: { size: Size; stock: number; available: boolean }[];
   fitType: FitType;
   color: Color;
   isNewArrival?: boolean;
