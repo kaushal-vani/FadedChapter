@@ -1,11 +1,19 @@
-import { Product } from "../../models/product/product.interface";
+import { slugify } from '../../utils/slugify.utils';
+import { Product } from '../../models/product/product.interface';
 
 export const ProductMock: Product[] = [
   {
     id: '1',
     name: 'Vintage Angel Tee',
     image: 'products/angel.jpg',
-    description: 'A classic black tee with a vintage angel graphic. Soft and comfortable.',
+    productGallery: [
+      'products/angel.jpg',
+      'products/polo.jpg',
+      'products/hoodie.jpg',
+      'products/trex.jpg',
+    ],
+    description:
+      'A classic black tee with a vintage angel graphic. Soft and comfortable.',
     composition: '100% Cotton',
     price: 29.99,
     inStock: true,
@@ -18,12 +26,14 @@ export const ProductMock: Product[] = [
     isBestSelling: false,
     isFeatured: true,
     rating: 4.5,
+    slug: slugify('Vintage Angel Tee'),
   },
   {
     id: '2',
     name: 'Relaxed Cupid Hoodie',
     image: 'products/hoodie.jpg',
-    description: 'A warm and cozy white hoodie featuring a subtle Cupid design.',
+    description:
+      'A warm and cozy white hoodie featuring a subtle Cupid design.',
     composition: '80% Cotton, 20% Polyester',
     price: 49.99,
     inStock: true,
@@ -36,6 +46,7 @@ export const ProductMock: Product[] = [
     isBestSelling: true,
     isFeatured: false,
     rating: 4.8,
+    slug: slugify('Relaxed Cupid Hoodie'),
   },
   {
     id: '3',
@@ -54,6 +65,7 @@ export const ProductMock: Product[] = [
     isBestSelling: false,
     isFeatured: false,
     rating: 4.2,
+    slug: slugify('Trex White Tee'),
   },
   {
     id: '4',
@@ -72,17 +84,18 @@ export const ProductMock: Product[] = [
     isBestSelling: true,
     isFeatured: false,
     rating: 4.9,
+    slug: slugify('Light Blue Denim Shirt'),
   },
   {
     id: '5',
-    name: 'Oversized Metro Graphic Tee',  // More descriptive name
+    name: 'Oversized Metro Graphic Tee', // More descriptive name
     image: 'products/metro.jpg',
     description: 'An oversized black tee with a bold metro graphic print.',
     composition: '100% Cotton',
     price: 39.99,
     inStock: true,
     category: 'Unisex',
-    productType: 'T-Shirt',  // Changed to T-Shirt
+    productType: 'T-Shirt', // Changed to T-Shirt
     size: ['S', 'M', 'L', 'XL'], // Added more sizes
     fitType: 'Boxy',
     color: 'Black',
@@ -90,6 +103,7 @@ export const ProductMock: Product[] = [
     isBestSelling: true,
     isFeatured: false,
     rating: 4.7,
+    slug: slugify('Oversized Metro Graphic Tee'),
   },
   {
     id: '6',
@@ -108,6 +122,7 @@ export const ProductMock: Product[] = [
     isBestSelling: false,
     isFeatured: false,
     rating: 4.5,
+    slug: slugify('Classic Black Polo'),
   },
   {
     id: '7',
@@ -126,12 +141,14 @@ export const ProductMock: Product[] = [
     isBestSelling: false,
     isFeatured: true,
     rating: 4.8,
+    slug: slugify('Red Relaxed Hoodie'),
   },
   {
     id: '8',
     name: 'Organic Cotton White Tee', // More descriptive name
     image: 'products/olive.jpg',
-    description: 'A trendy boxy white tee made with organic cotton. Super soft.',
+    description:
+      'A trendy boxy white tee made with organic cotton. Super soft.',
     composition: '100% Organic Cotton',
     price: 34.99,
     inStock: false,
@@ -144,6 +161,7 @@ export const ProductMock: Product[] = [
     isBestSelling: false,
     isFeatured: true,
     rating: 4.2,
+    slug: slugify('Organic Cotton White Tee'),
   },
   {
     id: '9',
@@ -162,5 +180,6 @@ export const ProductMock: Product[] = [
     isBestSelling: true,
     isFeatured: true,
     rating: 4.9,
+    slug: slugify('Dark Wash Denim Shirt'),
   },
 ];

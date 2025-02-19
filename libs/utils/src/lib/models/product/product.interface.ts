@@ -8,6 +8,7 @@ export interface Product {
   id: string;
   name: string;
   image: string;
+  productGallery?: string[];
   description: string;
   composition: string;
   price: number;
@@ -23,4 +24,5 @@ export interface Product {
   isCollaboration?:boolean;
   discountPercentage?: number;
   rating?: number;
+  slug: string;
 }

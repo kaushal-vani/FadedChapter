@@ -1,0 +1,54 @@
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+<div *ngIf="product" class="container product-overview">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="product-image-container">
+            <img [src]="mainImage" alt="{{ product.name }}" class="img-fluid product-image">
+          </div>
+
+          <div class="product-gallery-carousel">
+            <div *ngFor="let image of product.productGallery; let i = index" class="product-gallery-item"
+              [class.active]="i === currentImageIndex" (mouseenter)="switchMainImage(image, i)">
+              <img [src]="image" alt="Product Image {{ i + 1 }}" class="img-fluid">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">  <div class="product-details">
+            <h2 class="product-title">{{ product.name }}</h2>
+            <p class="product-description">{{ product.description }}</p>
+
+            <div class="product-composition">
+              <h3>Composition</h3>
+              <p>{{ product.composition }}</p>
+            </div>
+
+            <p class="product-price">Price: ${{ product.price }}</p>
+
+            <div class="product-options">
+              <div class="product-sizes">
+                <label for="size-select">Size:</label>
+                <select [(ngModel)]="selectedSize" class="form-control" id="size-select">
+                  <option *ngFor="let size of availableSizes" [value]="size" [disabled]="!product.size.includes(size)">
+                    {{ size }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="product-color">
+                <label for="color-display">Color:</label>
+                <p id="color-display">{{ product.color }}</p>
+              </div>
+
+              <button (click)="addToCart()" class="btn btn-primary add-to-cart" [disabled]="!selectedSize">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
