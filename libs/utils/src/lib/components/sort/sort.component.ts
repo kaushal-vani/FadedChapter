@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as bootstrap from 'bootstrap';
 import { SortOption } from '../../types/sort/sort.type';
 import { FormsModule } from '@angular/forms';
+import { SortService } from '../../services/sort/sort.service';
 
 @Component({
   selector: 'lib-sort',
@@ -10,23 +11,27 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './sort.component.html',
   styleUrl: './sort.component.scss',
 })
-export class SortComponent implements AfterViewInit {
+export class SortComponent implements AfterViewInit, OnInit {
   @ViewChild('offcanvasSort') offcanvasElement!: ElementRef;
   private offcanvasInstance!: bootstrap.Offcanvas;
 
-  @Output() sortChange = new EventEmitter<{ sortOption: SortOption, sortOrder: 'Ascending' | 'Descending' }>();
+  sortOptions: { sortOption: SortOption; sortOrder: 'Ascending' | 'Descending' } = {
+    sortOption: 'Price: Low to High',
+    sortOrder: 'Ascending'
+  };
 
-  selectedSortOption: SortOption = 'Price: Low to High';  // Default sort option
-  selectedSortOrder: 'Ascending' | 'Descending' = 'Ascending'; // Default sort order
+  @Output() sortChange = new EventEmitter<{ sortOption: SortOption; sortOrder: 'Ascending' | 'Descending' }>();
 
-  // Emit the selected sort option and order to parent component (Shop)
-  applySort() {
-    this.sortChange.emit({
-      sortOption: this.selectedSortOption,
-      sortOrder: this.selectedSortOrder
+  constructor(private sortService: SortService) { } // Inject the service
+
+  ngOnInit(): void {
+    this.sortService.sortOptions$.subscribe(options => {
+      this.sortOptions = options;
+      this.sortChange.emit(this.sortOptions); // Emit when options change
     });
-    this.closeSort()
   }
+
+
   ngAfterViewInit(): void {
     if (this.offcanvasElement) {
       this.offcanvasInstance = new bootstrap.Offcanvas(this.offcanvasElement.nativeElement);
@@ -45,5 +50,10 @@ export class SortComponent implements AfterViewInit {
     if (this.offcanvasInstance) {
       this.offcanvasInstance.hide();
     }
+  }
+
+  applySort() {
+    this.sortService.updateSortOptions(this.sortOptions);
+    this.closeSort();
   }
 }

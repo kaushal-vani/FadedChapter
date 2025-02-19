@@ -1,51 +1,47 @@
-<!-- Offcanvas Sidebar for Sort -->
-<div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="offcanvasSort"
-     aria-labelledby="offcanvasSortLabel" #offcanvasSort>
+<div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="offcanvasSort" aria-labelledby="offcanvasSortLabel" #offcanvasSort>
   <div class="offcanvas-header border-bottom">
     <h5 class="offcanvas-title" id="offcanvasSortLabel">Sort Options</h5>
     <button type="button" class="btn-close" (click)="closeSort()" aria-label="Close"></button>
   </div>
-  
+
   <div class="offcanvas-body">
-    
-    <!-- Sort By -->
+
     <div class="sort-section">
       <h6 class="sort-title">Sort By</h6>
       <div class="sort-options">
         <label>
-          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="Price: Low to High">
+          <input type="radio" name="sortBy" [(ngModel)]="sortOptions.sortOption" value="Price: Low to High">
           Price: Low to High
         </label>
         <label>
-          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="Price: High to Low">
+          <input type="radio" name="sortBy" [(ngModel)]="sortOptions.sortOption" value="Price: High to Low">
           Price: High to Low
         </label>
         <label>
-          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="New Arrivals">
+          <input type="radio" name="sortBy" [(ngModel)]="sortOptions.sortOption" value="New Arrivals">
           New Arrivals
         </label>
         <label>
-          <input type="radio" name="sortBy" [(ngModel)]="selectedSortOption" value="In Stock">
+          <input type="radio" name="sortBy" [(ngModel)]="sortOptions.sortOption" value="In Stock">
           In Stock
         </label>
       </div>
     </div>
-    
+
     <hr>
-    
-    <!-- Sort Order (Only show for New Arrivals or In Stock) -->
-    <div class="sort-section" *ngIf="selectedSortOption === 'New Arrivals' || selectedSortOption === 'In Stock'">
+
+    <div class="sort-section" *ngIf="sortOptions.sortOption === 'New Arrivals' || sortOptions.sortOption === 'In Stock'">
       <h6 class="sort-title">Sort Order</h6>
       <div class="sort-options">
         <label>
-          <input type="radio" name="sortOrder" [(ngModel)]="selectedSortOrder" value="Ascending"> Ascending
+          <input type="radio" name="sortOrder" [(ngModel)]="sortOptions.sortOrder" value="Ascending"> Ascending
         </label>
         <label>
-          <input type="radio" name="sortOrder" [(ngModel)]="selectedSortOrder" value="Descending"> Descending
+          <input type="radio" name="sortOrder" [(ngModel)]="sortOptions.sortOrder" value="Descending"> Descending
         </label>
       </div>
     </div>
-    
+
     <button class="btn btn-outline-dark square-button" (click)="applySort()">Apply Sort</button>
-  </div> <!-- End Offcanvas Body -->
+  </div>
 </div>
