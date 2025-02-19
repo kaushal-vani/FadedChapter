@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductCardSkeletonLoaderComponent } from '@faded-chapter/shared';
+import { SearchComponent } from '@faded-chapter/utils';
 
 @Component({
   selector: 'lib-accessories',
-  imports: [CommonModule, ProductCardSkeletonLoaderComponent],
+  imports: [CommonModule, SearchComponent],
   templateUrl: './accessories.component.html',
   styleUrl: './accessories.component.scss',
 })
