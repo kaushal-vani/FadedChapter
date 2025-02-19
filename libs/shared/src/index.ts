@@ -3,6 +3,7 @@ export * from './lib/components/footer/footer.component';
 export * from './lib/components/global-nav/global-nav.component';
 export * from './lib/components/hero-banner/hero-banner.component';
 export * from './lib/components/product-card-skeleton-loader/product-card-skeleton-loader.component'
+export * from './lib/components/product-overview-skeleton-loader/product-overview-skeleton-loader.component'
 
 // Interface
 export * from './lib/models/wishlist/wishlist.interface';
