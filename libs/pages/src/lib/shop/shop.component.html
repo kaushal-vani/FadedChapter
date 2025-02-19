@@ -11,7 +11,15 @@
 </div>
 
 <div class="product-grid">
-  <lib-product-card *ngFor="let product of filteredProducts" [product]="product"></lib-product-card>
+  <!-- Show skeleton loader while loading -->
+  <ng-container *ngIf="isLoading; else productList">
+    <lib-product-card-skeleton-loader *ngFor="let _ of skeletonCountArray"></lib-product-card-skeleton-loader>
+  </ng-container>
+
+  <!-- Show products once loaded -->
+  <ng-template #productList>
+    <lib-product-card *ngFor="let product of filteredProducts" [product]="product"></lib-product-card>
+  </ng-template>
 </div>
 
 <lib-filter (filterChange)="applyFilters()"></lib-filter>
