@@ -1,1 +1,1 @@
-export type ProductType = 'T-Shirt' | 'Hoodie' | 'Shirt'|'Polo';
+export type ProductType = 'T-Shirt' | 'Hoodie' | 'Shirt'|'Polo'|'Jeans'|'Sweater'|'Shorts'|'Accessories';

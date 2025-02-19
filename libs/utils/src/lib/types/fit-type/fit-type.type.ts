@@ -1,1 +1,1 @@
-export type FitType = 'Regular' | 'Relaxed' | 'Boxy';
+export type FitType = 'Regular' | 'Relaxed' | 'Boxy'|'Slim'|'Oversized';

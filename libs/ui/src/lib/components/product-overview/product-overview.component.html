@@ -1,54 +1,168 @@
-<div *ngIf="loading">Loading...</div>
-<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
-
-<div *ngIf="product" class="container product-overview">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="product-image-container">
-            <img [src]="mainImage" alt="{{ product.name }}" class="img-fluid product-image">
-          </div>
-
-          <div class="product-gallery-carousel">
-            <div *ngFor="let image of product.productGallery; let i = index" class="product-gallery-item"
-              [class.active]="i === currentImageIndex" (mouseenter)="switchMainImage(image, i)">
-              <img [src]="image" alt="Product Image {{ i + 1 }}" class="img-fluid">
-            </div>
-          </div>
+<body class="border-bottom">
+  <div *ngIf="loading">
+    <lib-product-overview-skeleton-loader></lib-product-overview-skeleton-loader>
+  </div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div
+    class="modal fade"
+    id="sizeGuideModal"
+    tabindex="-1"
+    aria-labelledby="sizeGuideModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sizeGuideModalLabel">Size Guide</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"></span>
+          </button>
         </div>
-
-        <div class="col-md-6">  <div class="product-details">
-            <h2 class="product-title">{{ product.name }}</h2>
-            <p class="product-description">{{ product.description }}</p>
-
-            <div class="product-composition">
-              <h3>Composition</h3>
-              <p>{{ product.composition }}</p>
+        <div class="modal-body">
+          <lib-size-guide></lib-size-guide>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="product" class="container product-overview">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="product-image-container">
+              <img
+                [src]="mainImage"
+                alt="{{ product.name }}"
+                class="img-fluid product-image"
+              />
             </div>
+            <div
+              class="product-gallery-carousel d-flex flex-wrap justify-content-center"
+            >
+              <div
+                *ngFor="let image of product.productGallery; let i = index"
+                class="product-gallery-item"
+                [class.active]="i === currentImageIndex"
+                (mouseenter)="switchMainImage(image, i)"
+              >
+                <img
+                  [src]="image"
+                  alt="Product Image {{ i + 1 }}"
+                  class="img-fluid"
+                />
+              </div>
+            </div>
+          </div>
 
-            <p class="product-price">Price: ${{ product.price }}</p>
+          <div class="col-12 col-md-6">
+            <div class="product-details">
+              <h2 class="product-title">{{ product.name }}</h2>
+              <p class="product-price">${{ product.price }}</p>
 
-            <div class="product-options">
-              <div class="product-sizes">
-                <label for="size-select">Size:</label>
-                <select [(ngModel)]="selectedSize" class="form-control" id="size-select">
-                  <option *ngFor="let size of availableSizes" [value]="size" [disabled]="!product.size.includes(size)">
-                    {{ size }}
-                  </option>
-                </select>
+              <div class="product-options d-flex flex-column gap-3">
+                <div class="size-section d-flex flex-column">
+                  <div class="d-flex justify-content-between">
+                    <span class="option-label">Select Size:</span>
+                    <a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#sizeGuideModal"
+                      class="size-guide"
+                      >Size Guide</a
+                    >
+                  </div>
+                  <div class="product-sizes d-flex flex-wrap">
+                    <ng-container *ngFor="let sizeObj of product?.size">
+                      <button
+                        (click)="selectSize(sizeObj.size)"
+                        [class.active]="selectedSize === sizeObj.size"
+                        [disabled]="!sizeObj.available"
+                        class="btn btn-sm size-btn"
+                      >
+                        {{ sizeObj.size }}
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
               </div>
 
-              <div class="product-color">
-                <label for="color-display">Color:</label>
-                <p id="color-display">{{ product.color }}</p>
-              </div>
+              <button
+                (click)="addToCart()"
+                class="btn btn-primary add-to-cart w-100 mt-3"
+                [disabled]="!selectedSize"
+              >
+                Add to Cart
+              </button>
 
-              <button (click)="addToCart()" class="btn btn-primary add-to-cart" [disabled]="!selectedSize">Add to Cart</button>
+              <div class="product-info">
+                <div class="accordion" id="productAccordion">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDescription">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseDescription"
+                        aria-expanded="false"
+                        aria-controls="collapseDescription"
+                      >
+                        Description
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseDescription"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingDescription"
+                      data-bs-parent="#productAccordion"
+                    >
+                      <div class="accordion-body">
+                        <p>
+                          Available Color: <strong>{{ product.color }}</strong>
+                        </p>
+                        <p>{{ product.description }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingComposition">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseComposition"
+                        aria-expanded="false"
+                        aria-controls="collapseComposition"
+                      >
+                        Composition
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseComposition"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingComposition"
+                      data-bs-parent="#productAccordion"
+                    >
+                      <div class="accordion-body">
+                        <p>{{ product.composition }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>
+<h2 class="product-suggestion">You might also like :</h2>
+<lib-suggested-products
+  [currentProductId]="currentProductId"
+></lib-suggested-products>
