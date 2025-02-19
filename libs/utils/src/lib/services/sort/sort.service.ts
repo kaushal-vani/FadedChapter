@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SortOption } from '../../types/sort/sort.type';
+import { SortOption, SortOrder } from '../../types/sort/sort.type';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { SortOption } from '../../types/sort/sort.type';
 export class SortService {
   private sortOptionsSubject = new BehaviorSubject<{
     sortOption: SortOption;
-    sortOrder: 'Ascending' | 'Descending';
+    sortOrder: SortOrder;
   }>({
     sortOption: 'Price: Low to High', // Default sort option
     sortOrder: 'Ascending', // Default sort order
@@ -17,7 +17,7 @@ export class SortService {
 
   updateSortOptions(sortOptions: {
     sortOption: SortOption;
-    sortOrder: 'Ascending' | 'Descending';
+    sortOrder: SortOrder;
   }) {
     this.sortOptionsSubject.next(sortOptions);
   }

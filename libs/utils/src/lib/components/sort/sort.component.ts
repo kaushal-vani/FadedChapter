@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as bootstrap from 'bootstrap';
-import { SortOption } from '../../types/sort/sort.type';
+import { SortOption, SortOrder } from '../../types/sort/sort.type';
 import { FormsModule } from '@angular/forms';
 import { SortService } from '../../services/sort/sort.service';
 
@@ -15,12 +15,12 @@ export class SortComponent implements AfterViewInit, OnInit {
   @ViewChild('offcanvasSort') offcanvasElement!: ElementRef;
   private offcanvasInstance!: bootstrap.Offcanvas;
 
-  sortOptions: { sortOption: SortOption; sortOrder: 'Ascending' | 'Descending' } = {
+  sortOptions: { sortOption: SortOption; sortOrder: SortOrder } = {
     sortOption: 'Price: Low to High',
     sortOrder: 'Ascending'
   };
 
-  @Output() sortChange = new EventEmitter<{ sortOption: SortOption; sortOrder: 'Ascending' | 'Descending' }>();
+  @Output() sortChange = new EventEmitter<{ sortOption: SortOption; sortOrder: SortOrder }>();
 
   constructor(private sortService: SortService) { } // Inject the service
 
