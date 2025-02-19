@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FooterComponent, GlobalNavComponent } from '@faded-chapter/shared';
+import { ScrollService } from '@faded-chapter/utils';
 
 @Component({
   imports: [GlobalNavComponent, RouterModule, CommonModule,FooterComponent],
@@ -10,4 +11,5 @@ import { FooterComponent, GlobalNavComponent } from '@faded-chapter/shared';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  constructor(private scrollService: ScrollService) { }
 }

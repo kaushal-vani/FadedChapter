@@ -23,6 +23,7 @@ export * from './lib/services/filter/filter.service'
 export * from './lib/services/search/search.service'
 export * from './lib/services/sort/sort.service'
 export * from './lib/services/product/product.service'
+export * from './lib/services/scroll/scroll.service'
 
 //Utils
 export * from './lib/utils/slugify.utils'
