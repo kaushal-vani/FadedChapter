@@ -31,13 +31,16 @@
   margin-top: 10px;
 
   .product-name {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #212121;
   }
 
   .product-price {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     color: #666;
     font-weight: 500;
+    &.out-of-stock {
+      color: red; /* Or any other style you want for "OUT OF STOCK" */
+    }
   }
 }

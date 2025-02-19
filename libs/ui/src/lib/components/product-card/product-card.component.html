@@ -1,9 +1,20 @@
 <div class="product-wrapper">
-    <div class="product-card shadow-sm" (onclick)="navigateToProduct()">
-      <img class="product-image" [src]="product.image" alt="{{ product.name }}">
-    </div>
-    <div class="product-details">
-      <h5 class="product-name">{{ product.name }}</h5>
-      <p class="product-price">${{ product.price }}</p>
-    </div>
+  <div
+    class="product-card shadow-sm"
+    (click)="navigateToProduct()"
+    (keydown.enter)="navigateToProduct()"
+    tabindex="0"
+    role="button"
+  >
+    <img class="product-image" [src]="product.image" alt="{{ product.name }}" />
   </div>
+  <div class="product-details">
+    <h5 class="product-name">{{ product.name }}</h5>
+    <p class="product-price" *ngIf="product.inStock; else outOfStock">
+      ${{ product.price }}
+    </p>
+    <ng-template #outOfStock>
+      <p class="product-price out-of-stock">OUT OF STOCK</p>
+    </ng-template>
+  </div>
+</div>
