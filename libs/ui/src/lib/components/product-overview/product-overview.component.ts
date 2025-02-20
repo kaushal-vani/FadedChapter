@@ -91,7 +91,6 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
     this.product = product;
     this.loading = false;
     this.availableSizes = product.size.map((s) => s.size);
-    this.extractCategoryAndProductType(); // Extract category and product type
   }
 
   private handleError(errorMessage: string): void {
@@ -140,13 +139,6 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
       this.selectedSize = size;
     }
     console.log('Selected Size:', this.selectedSize);
-  }
-
-  private extractCategoryAndProductType(): void {
-    if (this.product) {
-      this.selectedCategory = this.product.category;
-      this.selectedProductType = this.product.productType;
-    }
   }
 
   ngOnDestroy(): void {
