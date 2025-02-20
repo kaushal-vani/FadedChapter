@@ -2,6 +2,9 @@
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/global-nav/global-nav.component';
 export * from './lib/components/hero-banner/hero-banner.component';
+
+// Skeleton Component
+export * from './lib/components/cart-skeleton/cart-skeleton.component' 
 export * from './lib/components/product-card-skeleton-loader/product-card-skeleton-loader.component'
 export * from './lib/components/product-overview-skeleton-loader/product-overview-skeleton-loader.component'
 

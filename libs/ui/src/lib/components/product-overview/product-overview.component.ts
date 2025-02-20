@@ -10,6 +10,7 @@ import {
 } from '@faded-chapter/utils';
 import { FormsModule } from '@angular/forms';
 import {
+  CartService,
   ProductOverviewSkeletonLoaderComponent,
   SizeGuideComponent,
 } from '@faded-chapter/shared';
@@ -48,7 +49,8 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -105,25 +107,13 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
   }
 
   addToCart(): void {
-    if (!this.product || !this.selectedSize || this.selectedQuantity <= 0) return;
-
-    const selectedSizeObj = this.product.size.find(
-      (s) => s.size === this.selectedSize
-    );
-
-    if (!selectedSizeObj || !selectedSizeObj.available) {
-      console.warn('Selected size is not available.');
-      return;
-    }
-
-    console.log(
-      'Added to cart:',
-      this.product.name,
-      'Size:',
-      this.selectedSize,
-      'Quantity:',
-      this.selectedQuantity
-    );
+    if (!this.product || !this.selectedSize) return;
+  
+    const selectedSize = this.product.size.find(s => s.size === this.selectedSize);
+    if (!selectedSize || !selectedSize.available) return; // Prevent adding unavailable size
+  
+    this.cartService.addToCart(this.product, this.selectedSize, 1);
+    console.log('Added to cart:', this.product.name, 'Size:', this.selectedSize);
   }
 
   switchMainImage(image: string, index: number): void {
