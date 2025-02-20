@@ -1,24 +1,74 @@
+.offcanvas {
+  // Default styles for larger screens (optional)
+  width: 300px; // Example default width
+
+  @media (max-width: 767px) { // Adjust breakpoint as needed (typical mobile breakpoint)
+    width: calc(100vw - 72px); // Subtract 72px from the viewport width
+    // OR, if you want a fixed width reduction:
+    // width: 228px; // 300px - 72px
+  }
+
+  .offcanvas-header {
+    @media (max-width: 767px) {
+      padding: 10px; // Adjust padding as needed
+    }
+  }
+
+  .offcanvas-body {
+    @media (max-width: 767px) {
+      padding: 10px; // Adjust padding as needed
+    }
+  }
+}
+
 .filter-section {
-    padding: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee; // Optional: Add a separator
+
+  @media (max-width: 767px) {
+    padding: 8px 0; // Adjust padding for mobile
   }
-  
-  .filter-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 5px;
+}
+
+.filter-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  @media (max-width: 767px) {
+    font-size: 0.9rem; // Adjust font size for mobile
+    margin-bottom: 3px;
   }
-  
-  .filter-options label {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    gap: 5px;
-    cursor: pointer;
-    padding: 5px 0;
+}
+
+.filter-options label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px 0;
+
+  @media (max-width: 767px) {
+    font-size: 0.8rem; // Adjust font size for mobile
+    padding: 3px 0; // Adjust padding for mobile
   }
-  
-  .filter-options input[type="checkbox"] {
-    accent-color: black; /* Adjust to your brand color */
-    width: 16px;
-    height: 16px;
+}
+
+.filter-options input[type="checkbox"] {
+  accent-color: black; /* Adjust to your brand color */
+  width: 16px;
+  height: 16px;
+
+  @media (max-width: 767px) {
+    width: 14px; // Adjust checkbox size for mobile
+    height: 14px;
   }
+}
+
+// Optional: Add some spacing between filter sections on larger screens
+@media (min-width: 768px) {
+  .filter-section {
+    padding: 15px 0;
+  }
+}

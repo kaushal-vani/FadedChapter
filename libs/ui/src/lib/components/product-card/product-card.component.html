@@ -8,9 +8,12 @@
   >
     <img class="product-image" [src]="product.image" alt="{{ product.name }}" />
   </div>
+
   <div class="product-details">
     <h5 class="product-name">{{ product.name }}</h5>
-    <p class="product-price" *ngIf="product.inStock; else outOfStock">
+
+    <!-- Show price or OUT OF STOCK based on selected size -->
+    <p class="product-price" *ngIf="isSelectedSizeAvailable; else outOfStock">
       ${{ product.price }}
     </p>
     <ng-template #outOfStock>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterComponent, Product, ProductMock, SortComponent } from '@faded-chapter/utils';
+import { Router, NavigationEnd } from '@angular/router';
+import { FilterComponent, FilterService, Product, ProductMock, SortComponent } from '@faded-chapter/utils';
 import { ProductCardComponent } from '@faded-chapter/ui';
 import { ProductCardSkeletonLoaderComponent } from '@faded-chapter/shared';
 
@@ -19,7 +20,11 @@ export class ShopComponent implements OnInit {
   @ViewChild(FilterComponent) filterComponent!: FilterComponent;
   @ViewChild(SortComponent) sortComponent!: SortComponent;
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private router: Router,
+    private filterService: FilterService // Inject filter service
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -32,6 +37,19 @@ export class ShopComponent implements OnInit {
     }, 1000);
 
     this.updateSkeletonCount();
+
+    // Listen for route changes and reset filters
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.resetFilters();
+      }
+    });
+  }
+
+  resetFilters(): void {
+    this.filterService.resetFilters(); // Reset filters in service
+    this.filteredProducts = [...this.products]; // Show all products
+    this.cdRef.detectChanges();
   }
 
   updateSkeletonCount(): void {
@@ -94,29 +112,36 @@ export class ShopComponent implements OnInit {
   applySort(sortData: { sortOption: string; sortOrder: string }): void {
     const { sortOption, sortOrder } = sortData;
     this.isLoading = true;
-
+  
     setTimeout(() => {
-      switch (sortOption) {
-        case 'In Stock':
-          this.filteredProducts = this.filteredProducts.sort((a, b) => Number(b.inStock) - Number(a.inStock));
-          break;
-        case 'Price: Low to High':
-          this.filteredProducts = this.filteredProducts.sort((a, b) => a.price - b.price);
-          break;
-        case 'Price: High to Low':
-          this.filteredProducts = this.filteredProducts.sort((a, b) => b.price - a.price);
-          break;
-        case 'New Arrivals':
-          this.filteredProducts = this.filteredProducts.sort((a, b) => Number(b.isNewArrival) - Number(a.isNewArrival));
-          break;
-      }
-
-      if (sortOrder === 'Descending') {
+      // Recalculate in-stock status dynamically based on size selection
+      if (sortOption === 'In Stock') {
+        this.filteredProducts = this.filteredProducts.sort((a, b) => {
+          const selectedSize = this.filterService.getSelectedSize();
+  
+          const stockA = selectedSize
+            ? a.size.find((s) => s.size === selectedSize)?.stock || 0
+            : a.size.reduce((acc, s) => acc + s.stock, 0);
+  
+          const stockB = selectedSize
+            ? b.size.find((s) => s.size === selectedSize)?.stock || 0
+            : b.size.reduce((acc, s) => acc + s.stock, 0);
+  
+          return stockB - stockA; // Sort descending by stock count
+        });
+      } else if (sortOption === 'Price: Low to High') {
+        this.filteredProducts = this.filteredProducts.sort((a, b) => a.price - b.price);
+      } else if (sortOption === 'Price: High to Low') {
+        this.filteredProducts = this.filteredProducts.sort((a, b) => b.price - a.price);
+      } 
+      // Apply sorting order (Ascending / Descending)
+      if (sortOrder === 'Out Of Stock') {
         this.filteredProducts.reverse();
       }
-
+  
       this.updateSkeletonCount();
       this.isLoading = false;
     }, 1000);
   }
+  
 }

@@ -43,4 +43,13 @@ export class FilterService {
 
     this.updateFilters(updatedFilters); // Update using the service
   }
+
+  getSelectedSize(): string | null {
+    const filters = this.selectedFiltersSubject.getValue();
+    return filters.size && filters.size.length > 0 ? filters.size[0] : null;
+  }
+
+  resetFilters() {
+    this.selectedFiltersSubject.next({}); // Reset filters to empty object
+  }
 }

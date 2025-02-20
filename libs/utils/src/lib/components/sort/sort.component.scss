@@ -1,63 +1,103 @@
-.sort-section {
-    padding: 10px 0;
+.offcanvas {
+  // Default styles for larger screens (optional)
+  width: 300px; // Example default width
+
+  @media (max-width: 767px) { // Adjust breakpoint as needed (typical mobile breakpoint)
+    width: calc(100vw - 72px); // Subtract 72px from the viewport width
+    // OR, if you want a fixed width reduction:
+    // width: 228px; // 300px - 72px
   }
-  
-  .sort-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .sort-options label {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    gap: 5px;
-    cursor: pointer;
-    padding: 5px 0;
-  }
-  
-  .sort-options input[type="radio"] {
-    accent-color: black; /* Adjust to your brand color */
-    width: 16px;
-    height: 16px;
-  }
-  
-  /* Optional styling for the offcanvas */
+
   .offcanvas-header {
-    border-bottom: 1px solid #dee2e6;
+    @media (max-width: 767px) {
+      padding: 10px; // Adjust padding as needed
+    }
   }
-  
+
   .offcanvas-body {
-    padding: 15px;
+    padding: 15px; // Default padding
+    @media (max-width: 767px) {
+      padding: 10px; // Adjust padding as needed for mobile
+    }
   }
+}
 
 
-  /* Style for the Apply Sort button */
-  .square-button {
-    width: 100%;
-    padding: 10px 0;  /* Adjust padding for better spacing */
-    background: transparent;
-    border: 2px solid #000;  /* Set border color */
-    color: #000;  /* Set text color */
-    font-size: 1rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;  /* Smooth transition for hover effects */
-    border-radius: 0;
-    text-align: center;
+.sort-section {
+  padding: 10px 0;
+
+  @media (max-width: 767px) {
+    padding: 8px 0; // Adjust padding for mobile
   }
-  
-  /* Hover effect for inverse colors */
-  .square-button:hover {
-    background-color: #000;  /* Inverse background */
-    color: #fff;  /* Inverse text color */
-    border-color: black !important;
-    font-weight: bold; /* Inverse border */
+}
+
+.sort-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  @media (max-width: 767px) {
+    font-size: 0.9rem; // Adjust font size for mobile
+    margin-bottom: 3px;
   }
-  
-  /* Focus and active state for accessibility */
-  .square-button:focus, button:active {
-    outline: none;  /* Remove outline on focus */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);  /* Subtle focus shadow */
+}
+
+.sort-options label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px 0;
+
+  @media (max-width: 767px) {
+    font-size: 0.8rem; // Adjust font size for mobile
+    padding: 3px 0; // Adjust padding for mobile
   }
+}
+
+.sort-options input[type="radio"] {
+  accent-color: black; /* Adjust to your brand color */
+  width: 16px;
+  height: 16px;
+
+  @media (max-width: 767px) {
+    width: 14px; // Adjust checkbox size for mobile
+    height: 14px;
+  }
+}
+
+
+/* Style for the Apply Sort button */
+.square-button {
+  width: 100%;
+  padding: 10px 0;  /* Adjust padding for better spacing */
+  background: transparent;
+  border: 2px solid #000;  /* Set border color */
+  color: #000;  /* Set text color */
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;  /* Smooth transition for hover effects */
+  border-radius: 0;
+  text-align: center;
+
+    @media (max-width: 767px) {
+        font-size: 0.9rem; // Adjust font size for mobile
+        padding: 8px 0; // Adjust padding for mobile
+    }
+}
+
+/* Hover effect for inverse colors */
+.square-button:hover {
+  background-color: #000;  /* Inverse background */
+  color: #fff;  /* Inverse text color */
+  border-color: black !important;
+  font-weight: bold; /* Inverse border */
+}
+
+/* Focus and active state for accessibility */
+.square-button:focus, button:active {
+  outline: none;  /* Remove outline on focus */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);  /* Subtle focus shadow */
+}
