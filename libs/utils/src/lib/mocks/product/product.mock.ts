@@ -44,6 +44,7 @@ export const ProductMock: Product[] = [
     category: 'Unisex',
     productType: 'Hoodie',
     size: [
+      { size: 'XS', stock: 3, available: true },
       { size: 'S', stock: 8, available: true },
       { size: 'M', stock: 12, available: true },
       { size: 'L', stock: 3, available: true },
@@ -73,6 +74,8 @@ export const ProductMock: Product[] = [
       { size: 'S', stock: 6, available: true },
       { size: 'M', stock: 0, available: false },
       { size: 'L', stock: 4, available: true },
+      { size: 'XL', stock: 0, available: false },
+      { size: 'XXL', stock: 5, available: true },
     ],
     fitType: 'Boxy',
     color: 'White',
@@ -93,6 +96,7 @@ export const ProductMock: Product[] = [
     category: 'Men',
     productType: 'Shirt',
     size: [
+      { size: 'XS', stock: 0, available: false },
       { size: 'S', stock: 10, available: true },
       { size: 'M', stock: 5, available: true },
       { size: 'L', stock: 2, available: true },
@@ -122,6 +126,7 @@ export const ProductMock: Product[] = [
       { size: 'M', stock: 10, available: true },
       { size: 'L', stock: 6, available: true },
       { size: 'XL', stock: 3, available: true },
+      { size: 'XXL', stock: 0, available: false },
     ],
     fitType: 'Boxy',
     color: 'Black',

@@ -1,8 +1,22 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'"
+  aria-label="breadcrumb"
+  class="breadcrumb-container"
+>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/shop">Shop</a></li>
+    <li class="breadcrumb-item active" aria-current="page" *ngIf="product">
+      {{ product.name }}
+    </li>
+  </ol>
+</nav>
+
 <body class="border-bottom">
   <div *ngIf="loading">
     <lib-product-overview-skeleton-loader></lib-product-overview-skeleton-loader>
   </div>
   <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
   <div
     class="modal fade"
     id="sizeGuideModal"
@@ -29,6 +43,7 @@
       </div>
     </div>
   </div>
+
   <div *ngIf="product" class="container product-overview">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-8">

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
   Product,
   ProductService,
@@ -18,18 +18,21 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lib-product-overview',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ProductOverviewSkeletonLoaderComponent,
     SizeGuideComponent,
     SuggestedProductsComponent,
-  ], // Add SuggestedProductsComponent to imports
+  ],
   templateUrl: './product-overview.component.html',
   styleUrls: ['./product-overview.component.scss'],
 })
 export class ProductOverviewComponent implements OnInit, OnDestroy {
   private routeSubscription: Subscription | undefined;
+  private imageRotationInterval: ReturnType<typeof setInterval> | null = null;
   product: Product | undefined;
   loading = true;
   error: string | null = null;
@@ -38,20 +41,20 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
   availableSizes: Size[] = [];
   mainImage = '';
   currentImageIndex = 0;
-  currentProductId: string | undefined; 
-
+  currentProductId: string | undefined;
   selectedCategory: Category | undefined;
   selectedProductType: ProductType | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,private router: Router 
+    private productService: ProductService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.params.subscribe(params => { // Use params instead of snapshot
-      this.loading = true; // Reset loading state
-      this.error = null; // Clear any previous errors
+    this.routeSubscription = this.route.params.subscribe((params) => {
+      this.loading = true;
+      this.error = null;
       const productSlug = params['slug'];
       const productId = params['id'];
 
@@ -69,8 +72,6 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
     this.productService.getProductBySlug(slug).subscribe({
       next: (product) => {
         this.handleSuccess(product);
-        this.mainImage = product.image;
-        this.currentProductId = product.id;
       },
       error: (error) => this.handleError(error.message),
     });
@@ -80,8 +81,6 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
     this.productService.getProductById(id).subscribe({
       next: (product) => {
         this.handleSuccess(product);
-        this.mainImage = product.image;
-        this.currentProductId = product.id;
       },
       error: (error) => this.handleError(error.message),
     });
@@ -91,6 +90,12 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
     this.product = product;
     this.loading = false;
     this.availableSizes = product.size.map((s) => s.size);
+    this.mainImage = product.image;
+    this.currentProductId = product.id;
+    
+    if (this.product?.productGallery && this.product.productGallery.length > 1) {
+      this.startImageRotation();
+    }
   }
 
   private handleError(errorMessage: string): void {
@@ -100,8 +105,7 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
   }
 
   addToCart(): void {
-    if (!this.product || !this.selectedSize || this.selectedQuantity <= 0)
-      return;
+    if (!this.product || !this.selectedSize || this.selectedQuantity <= 0) return;
 
     const selectedSizeObj = this.product.size.find(
       (s) => s.size === this.selectedSize
@@ -120,17 +124,12 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
       'Quantity:',
       this.selectedQuantity
     );
-
-    // Now you can access the category and product type:
-    if (this.selectedCategory && this.selectedProductType) {
-      console.log('Category:', this.selectedCategory); // Assuming Category has a 'name' property
-      console.log('Product Type:', this.selectedProductType); // Assuming ProductType has a 'name' property
-    }
   }
 
   switchMainImage(image: string, index: number): void {
     this.mainImage = image;
     this.currentImageIndex = index;
+    this.stopImageRotation(); // Pause rotation when user interacts
   }
 
   selectSize(size: Size): void {
@@ -138,12 +137,35 @@ export class ProductOverviewComponent implements OnInit, OnDestroy {
     if (selectedSizeObj?.available) {
       this.selectedSize = size;
     }
-    console.log('Selected Size:', this.selectedSize);
+  }
+
+  startImageRotation(): void {
+    this.imageRotationInterval = setInterval(() => {
+      if (this.product?.productGallery && this.product.productGallery.length > 0) {
+        this.currentImageIndex =
+          (this.currentImageIndex + 1) % this.product.productGallery.length;
+        this.mainImage = this.product.productGallery[this.currentImageIndex];
+      }
+    }, 5000);
+  }
+  
+
+  stopImageRotation(): void {
+    if (this.imageRotationInterval) {
+      clearInterval(this.imageRotationInterval);
+      this.imageRotationInterval = null;
+    }
+  }
+
+  restartImageRotation(): void {
+    this.stopImageRotation();
+    this.startImageRotation();
   }
 
   ngOnDestroy(): void {
     if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe(); // Unsubscribe to prevent memory leaks
+      this.routeSubscription.unsubscribe();
     }
+    this.stopImageRotation(); // Clean up interval
   }
 }
