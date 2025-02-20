@@ -7,6 +7,7 @@ export * from './lib/components/product-overview-skeleton-loader/product-overvie
 
 // Interface
 export * from './lib/models/wishlist/wishlist.interface';
+export * from './lib/models/size-guide/size-guide.interface'
 
 // Service
 export * from './lib/services/cart/cart.service'
