@@ -1,1 +1,120 @@
-<p>cart works!</p>
+<lib-cart-skeleton *ngIf="cartItems.length === 0"></lib-cart-skeleton>
+<div class="container mt-5 cart-container" *ngIf="cartItems.length > 0">
+    <div class="row">
+      <div class="col-lg-8 col-12 cart-items-container">
+        <h3 class="cart-title">Your Cart</h3>
+        <div
+          *ngFor="let item of cartItems; let i = index"
+          class="cart-item-wrapper"
+        >
+          <div class="cart-item frosted-glass">
+            <div class="d-flex">
+              <img
+                [src]="item.product.image"
+                alt="{{ item.product.name }}"
+                class="product-img me-3"
+              />
+              <div class="product-details">
+                <h6 class="product-name">{{ item.product.name }}</h6>
+                <p class="product-meta mb-0">Size: {{ item.size }}</p>
+                <p class="product-price mb-0">
+                  $ {{ (item.product.price * item.quantity).toFixed(2) }}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex quantity align-items-center">
+              <button
+                *ngIf="item.quantity > 1"
+                class="btn btn-sm btn-outline-secondary rounded-circle quantity-btn"
+                (click)="
+                  updateQuantity(
+                    item.product.id,
+                    item.size,
+                    item.quantity - 1,
+                    item.product
+                  )
+                "
+              >
+                <i class="bi bi-dash"></i>
+              </button>
+              <button
+                *ngIf="item.quantity === 1"
+                class="btn btn-sm btn-outline-danger rounded-circle quantity-btn"
+                (click)="removeFromCart(item.product.id, item.size)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+              <span class="quantity mx-2">{{ item.quantity }}</span>
+              <button
+                class="btn btn-sm btn-outline-secondary rounded-circle quantity-btn"
+                (click)="
+                  updateQuantity(
+                    item.product.id,
+                    item.size,
+                    item.quantity + 1,
+                    item.product
+                  )
+                "
+                [disabled]="
+                  item.quantity >= getStockForSize(item.product, item.size)
+                "
+              >
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-lg-4 col-12 cart-summary-container">
+        <div class="cart-summary frosted-glass">
+          <h5 class="cart-summary-title">Order Summary</h5>
+          <div class="summary-table">
+            <div class="summary-row" *ngIf="cartItems.length">
+              <div class="summary-cell left">Subtotal:</div>
+              <div class="summary-cell right">${{ totalPrice.toFixed(2) }}</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-cell left">Estimated Tax:</div>
+              <div class="summary-cell right">${{ estimatedTax.toFixed(2) }}</div>
+            </div>
+            <div class="summary-row" *ngIf="discountAmount > 0">
+              <div class="summary-cell left">Discount:</div>
+              <div class="summary-cell right">
+                -${{ discountAmount.toFixed(2) }}
+              </div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-cell left">Shipping:</div>
+              <div class="summary-cell right">Calculated at checkout</div>
+            </div>
+            <div class="summary-row total-row">
+              <div class="summary-cell left"><strong>Total:</strong></div>
+              <div class="summary-cell right">
+                <strong
+                  >${{
+                    (totalPrice + estimatedTax - discountAmount).toFixed(2)
+                  }}</strong
+                >
+              </div>
+            </div>
+          </div>
+  
+          <button
+            class="btn btn-primary btn-lg btn-checkout"
+            [disabled]="cartItems.length === 0"
+            (click)="proceedToCheckout()"
+          >
+            Secure Checkout
+          </button>
+  
+          <div class="secure-checkout">
+            <i class="bi bi-lock-fill"></i> 100% Secure Payment
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <lib-suggested-products
+  [currentProductId]="currentProductId"
+></lib-suggested-products>
