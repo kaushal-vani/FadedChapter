@@ -1,25 +1,46 @@
 /* Grid layout: 4 products per row on desktop */
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); // 4 columns per row
-    gap: 20px;
-    padding: 20px;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+
   @media (max-width: 1024px) {
-    .product-grid {
-      grid-template-columns: repeat(3, 1fr); // 3 columns for tablets
-    }
+    grid-template-columns: repeat(3, 1fr);
   }
-  
+
   @media (max-width: 768px) {
-    .product-grid {
-      grid-template-columns: repeat(2, 1fr); // 2 columns for smaller tablets
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) { // Enable horizontal scrolling on mobile
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 10px 0;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > lib-product-card,
+    > lib-product-card-skeleton-loader {  // Ensure skeletons behave like product cards
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 80%; // Match the width of product cards
     }
   }
-  
-  @media (max-width: 480px) {
-    .product-grid {
-      grid-template-columns: repeat(1, 1fr); // 1 column for mobile
-    }
+}
+
+/* Apply image styles only for mobile */
+@media (max-width: 600px) {
+  lib-product-card img {
+    border-radius: 8px;
+    width: 90%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
+}
