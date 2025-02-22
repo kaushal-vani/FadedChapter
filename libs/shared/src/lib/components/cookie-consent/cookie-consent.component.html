@@ -1,0 +1,13 @@
+<div class="cookie-consent" [ngClass]="{'show': showConsent}">
+    <div class="cookie-content">
+      <p>
+        We use cookies for site functionality and analytics. You can accept all, only required, or personalize your choices.
+      </p>
+      <div class="cookie-buttons">
+        <button class="personalize" (click)="personalizeChoices()">Personalize</button>
+        <button class="required" (click)="continueWithoutAccepting()">Required Only</button>
+        <button class="all" (click)="acceptAll()">Accept All</button>
+      </div>
+      <p><a href="/privacy-policy" target="_blank">Privacy Policy</a></p>
+    </div>
+  </div>

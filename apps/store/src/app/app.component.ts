@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FooterComponent, GlobalNavComponent } from '@faded-chapter/shared';
+import { CookieConsentComponent, FooterComponent, GlobalNavComponent } from '@faded-chapter/shared';
 import { ScrollService } from '@faded-chapter/utils';
 
 @Component({
-  imports: [GlobalNavComponent, RouterModule, CommonModule,FooterComponent],
+  imports: [GlobalNavComponent, RouterModule, CommonModule,FooterComponent, CookieConsentComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

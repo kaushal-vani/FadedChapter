@@ -1,0 +1,53 @@
+<div class="personalize-cookies">
+  <h2>Personalize Cookie Choices</h2>
+
+  <div class="cookie-category">
+    <h3>Analytics</h3>
+    <p>
+      These cookies help us understand how you use our website. They provide
+      insights into visitor behavior, such as page views and traffic sources,
+      allowing us to improve our site's performance and user experience.
+    </p>
+    <div class="toggle-switch">
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="analyticsConsent" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="cookie-category">
+    <h3>Functional</h3>
+    <p>
+      These cookies enable essential features and personalization. They remember
+      your preferences, such as language settings and login details, to provide
+      a more tailored and efficient browsing experience.
+    </p>
+    <div class="toggle-switch">
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="functionalConsent" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="cookie-category">
+    <h3>Marketing</h3>
+    <p>
+      These cookies track your online activity to deliver targeted
+      advertisements. They help us show you relevant products and promotions
+      based on your interests, enhancing your shopping experience.
+    </p>
+    <div class="toggle-switch">
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="marketingConsent" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="save" (click)="savePreferences()">Save</button>
+    <button class="cancel" (click)="cancelPreferences()">Cancel</button>
+  </div>
+</div>

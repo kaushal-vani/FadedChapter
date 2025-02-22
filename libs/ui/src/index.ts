@@ -9,3 +9,6 @@ export * from './lib/components/product-list/best-selling/best-selling.component
 export * from './lib/components/product-list/featured-products/featured-products.component'
 export * from './lib/components/product-list/new-arrival/new-arrival.component'
 export * from './lib/components/product-list/suggested-products/suggested-products.component'
+
+// User Experience Component 
+export * from './lib/components/personalize-cookie/personalize-cookie.component'
