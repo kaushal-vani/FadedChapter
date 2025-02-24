@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AccessoriesComponent } from './accessories.component';
+import { ImpactByColorComponent } from './impact-by-color.component';
 
-describe('AccessoriesComponent', () => {
-  let component: AccessoriesComponent;
-  let fixture: ComponentFixture<AccessoriesComponent>;
+describe('ImpactByColorComponent', () => {
+  let component: ImpactByColorComponent;
+  let fixture: ComponentFixture<ImpactByColorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AccessoriesComponent],
+      imports: [ImpactByColorComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AccessoriesComponent);
+    fixture = TestBed.createComponent(ImpactByColorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
