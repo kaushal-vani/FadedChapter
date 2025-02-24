@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService, CartSkeletonComponent } from '@faded-chapter/shared';
-import { Product } from '@faded-chapter/utils';
+import { CartItem, CartService, CartSkeletonComponent } from '@faded-chapter/shared';
 import { SuggestedProductsComponent } from '../product-list/suggested-products/suggested-products.component';
+import { Router } from '@angular/router';
+import { Product } from '@faded-chapter/utils';
 
 @Component({
   selector: 'lib-cart',
@@ -11,14 +12,15 @@ import { SuggestedProductsComponent } from '../product-list/suggested-products/s
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
-  cartItems: { product: Product; size: string; quantity: number }[] = [];
+  cartItems: CartItem[] = []; // Use CartItem interface
   totalPrice = 0;
   currentProductId = '';
   appliedDiscount = true;
 
   constructor(
     private cartService: CartService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -71,5 +73,13 @@ export class CartComponent implements OnInit {
 
   proceedToCheckout() {
     console.log('Proceeding to checkout with total:', this.totalPrice);
+  }
+
+  continueShopping() {
+    this.router.navigate(['/products']);
+  }
+
+  trackById(index: number, item: CartItem): string {
+    return item.product.id + item.size;
   }
 }

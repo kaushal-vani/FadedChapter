@@ -12,6 +12,7 @@ export * from './lib/components/skeleton-components/product-overview-skeleton-lo
 // Interface
 export * from './lib/models/wishlist/wishlist.interface';
 export * from './lib/models/size-guide/size-guide.interface'
+export * from './lib/models/cart-item/cart-item.interface'
 
 // Service
 export * from './lib/services/cart/cart.service'
