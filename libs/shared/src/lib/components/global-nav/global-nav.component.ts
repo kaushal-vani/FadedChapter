@@ -1,9 +1,10 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { SearchComponent } from '@faded-chapter/utils';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil, Subscription } from 'rxjs';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'lib-global-nav',
@@ -11,11 +12,13 @@ import { Subject, filter, takeUntil } from 'rxjs';
   templateUrl: './global-nav.component.html',
   styleUrl: './global-nav.component.scss',
 })
-export class GlobalNavComponent implements OnDestroy {
+export class GlobalNavComponent implements OnInit, OnDestroy {
   isSearchOpen = false;
+  itemCount = 0; // Add itemCount property
   private destroy$ = new Subject<void>();
+  private itemCountSubscription: Subscription | undefined; // Add subscription property
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cartService: CartService) { // Inject CartService
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -24,6 +27,12 @@ export class GlobalNavComponent implements OnDestroy {
       .subscribe(() => {
         this.closeSearch();
       });
+  }
+
+  ngOnInit(): void {
+    this.itemCountSubscription = this.cartService.itemCount$.subscribe(
+      (count) => (this.itemCount = count)
+    );
   }
 
   toggleSearch() {
@@ -63,5 +72,8 @@ export class GlobalNavComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    if(this.itemCountSubscription){
+      this.itemCountSubscription.unsubscribe();
+    }
   }
 }

@@ -8,10 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   private cartItems = new BehaviorSubject<{ product: Product; size: string; quantity: number }[]>([]);
   cartItems$ = this.cartItems.asObservable();
-  private cartCookieName = 'cartItems'; // Cookie name for cart data
+
+  private itemCountSubject = new BehaviorSubject<number>(0); // Add item count subject
+  itemCount$ = this.itemCountSubject.asObservable(); // Add item count observable
+
+  private cartCookieName = 'cartItems';
 
   constructor(private cookieService: CookieHandlerService) {
-    this.loadCartFromCookie(); // Load cart from cookie on service initialization
+    this.loadCartFromCookie();
+    this.updateItemCount(); // Initial update
   }
 
   addToCart(product: Product, size: string, quantity: number) {
@@ -31,7 +36,8 @@ export class CartService {
     }
 
     this.cartItems.next([...currentCart]);
-    this.saveCartToCookie(); // Save cart to cookie after changes
+    this.saveCartToCookie();
+    this.updateItemCount(); // Update item count
   }
 
   removeFromCart(productId: string, size: string) {
@@ -40,7 +46,8 @@ export class CartService {
     );
 
     this.cartItems.next(updatedCart);
-    this.saveCartToCookie(); // Save cart to cookie after changes
+    this.saveCartToCookie();
+    this.updateItemCount(); // Update item count
   }
 
   updateQuantity(productId: string, size: string, quantity: number, product: Product) {
@@ -55,7 +62,8 @@ export class CartService {
 
       item.quantity = Math.min(Math.max(1, quantity), selectedSize.stock);
       this.cartItems.next([...currentCart]);
-      this.saveCartToCookie(); // Save cart to cookie after changes
+      this.saveCartToCookie();
+      this.updateItemCount(); // Update item count
     }
   }
 
@@ -73,10 +81,16 @@ export class CartService {
         this.cartItems.next([]);
       }
     }
+    this.updateItemCount(); // Update count after cookie load
   }
 
   private saveCartToCookie(): void {
     const cartJson = JSON.stringify(this.cartItems.getValue());
-    this.cookieService.setCookie(this.cartCookieName, cartJson, 7); // Expires in 7 days
+    this.cookieService.setCookie(this.cartCookieName, cartJson, 7);
+  }
+
+  private updateItemCount(): void {
+    const totalItems = this.cartItems.getValue().reduce((total, item) => total + item.quantity, 0);
+    this.itemCountSubject.next(totalItems);
   }
 }

@@ -65,16 +65,18 @@
         <a class="nav-link px-3 position-relative" routerLink="/wishlist">
           <i class="bi bi-suit-heart" style="font-size: 22px"></i>
         </a>
-        <a class="nav-link px-3" routerLink="/cart">
+        <a class="nav-link px-3 position-relative" routerLink="/cart">
           <i class="bi bi-cart" style="font-size: 22px"></i>
+          <span class="badge bg-dark rounded-pill position-absolute" style="top: -8px; right: -8px;" *ngIf="itemCount > 0">{{ itemCount }}</span>
         </a>
         <button class="nav-link px-3" routerLink="#">
           <i class="bi bi-person" style="font-size: 22px"></i>
         </button>
       </div>
 
-      <a class="nav-link d-block d-lg-none" routerLink="/cart">
+      <a class="nav-link d-block d-lg-none position-relative" routerLink="/cart">
         <i class="bi bi-cart" style="font-size: 22px"></i>
+        <span class="badge bg-dark rounded-pill position-absolute" style="top: -8px; right: -8px;" *ngIf="itemCount > 0">{{ itemCount }}</span>
       </a>
     </div>
   </header>
