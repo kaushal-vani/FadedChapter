@@ -1,8 +1,8 @@
 import { ExtraOptions, Route } from '@angular/router';
 import {
-  AccessoriesComponent,
   CollaborationsComponent,
   HomeComponent,
+  ImpactByColorComponent,
   NewArrivalsComponent,
   ShopComponent,
 } from '@faded-chapter/pages';
@@ -31,7 +31,7 @@ export const appRoutes: Route[] = [
   { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent },
   //Pages
-  { path: 'accessories', component: AccessoriesComponent },
+  { path: 'impact-by-color', component: ImpactByColorComponent },
   { path: 'collaboration', component: CollaborationsComponent },
   { path: 'home', component: HomeComponent },
   { path: 'new-arrivals', component: NewArrivalsComponent },
