@@ -1,90 +1,128 @@
-<!-- Main Header Section -->
- <div class=" bg-light sticky-top">
-<header class="py-3">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-        <!-- Hamburger Icon for Mobile (hidden on desktop) -->
-        <button
-          class="navbar-toggler d-block d-lg-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasResponsive"
-          aria-controls="offcanvasResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          style="display: flex; align-items: center;"
+<div
+  *ngIf="isSearchOpen"
+  class="search-backdrop"
+  (click)="closeSearch()"
+  (keydown.enter)="closeSearch()"
+  tabindex="0"
+  role="button"
+  aria-label="Close Search"
+></div>
+
+<div *ngIf="isSearchOpen" class="floating-search-container">
+  <div class="search-header">
+    <lib-search class="floating-search"></lib-search>
+    <button class="close-search-btn" (click)="closeSearch()">
+      <i class="bi bi-x"></i>
+    </button>
+  </div>
+</div>
+
+<div class="bg-light sticky-top" *ngIf="!isSearchOpen">
+  <header class="py-3 main-header">
+    <div
+      class="container-fluid d-flex justify-content-between align-items-center"
+    >
+      <button
+        class="navbar-toggler d-block d-lg-none"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasResponsive"
+        aria-controls="offcanvasResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        style="display: flex; align-items: center"
+      >
+        <span class="navbar-toggler-icon">
+          <i class="bi bi-list" style="font-size: 28px"></i>
+        </span>
+      </button>
+
+      <a
+        class="navbar-brand mx-auto mx-lg-0"
+        routerLink="/home"
+        style="display: flex; align-items: center"
+      >
+        <img
+          src="logos/fc-flash-black.png"
+          alt="Faded Chapter Logo"
+          class="img-fluid"
+          style="max-width: 88px"
+        />
+      </a>
+
+      <div class="d-none d-lg-flex align-items-center">
+        <a
+          class="nav-link px-3"
+          (click)="toggleSearch()"
+          (keydown.enter)="toggleSearch()"
+          tabindex="0"
+          role="button"
+          aria-label="Open Search"
         >
-          <span class="navbar-toggler-icon">
-            <i class="bi bi-list" style="font-size: 28px"></i>
-          </span>
-        </button>
-      
-        <!-- Logo (left-aligned on mobile and desktop) -->
-        <a class="navbar-brand mx-auto mx-lg-0" routerLink="/home" style="display: flex; align-items: center;">
-          <img src="logos/fc-flash-black.png" alt="Faded Chapter Logo" class="img-fluid" style="max-width: 88px;" />
-          <!-- Adjusted spacing if needed -->
+          <i class="bi bi-search" style="font-size: 22px"></i>
         </a>
 
-        <!-- Wishlist, Cart, Login (visible on desktop and mobile, right-aligned on desktop) -->
-        <div class="d-none d-lg-flex align-items-center" style="display: flex; align-items: center;">
-            <a class="nav-link px-3" routerLink="#">
-                <i class="bi bi-search" style="font-size: 22px"></i>
-              </a>
-          <a class="nav-link px-3 position-relative" routerLink="/wishlist">
-            <i class="bi bi-suit-heart" style="font-size: 22px"></i>
-          </a>
-          <a class="nav-link px-3" routerLink="/cart">
-            <i class="bi bi-cart" style="font-size: 22px"></i>
-          </a>
-          <button class="nav-link px-3" routerLink="#">
-            <i class="bi bi-person" style="font-size: 22px"></i>
-            
-          </button>
-        </div>
-      
-        <!-- Cart (right side on mobile, shown outside offcanvas) -->
-        <a class="nav-link d-block d-lg-none" routerLink="/cart">
+        <a class="nav-link px-3 position-relative" routerLink="/wishlist">
+          <i class="bi bi-suit-heart" style="font-size: 22px"></i>
+        </a>
+        <a class="nav-link px-3" routerLink="/cart">
           <i class="bi bi-cart" style="font-size: 22px"></i>
         </a>
+        <button class="nav-link px-3" routerLink="#">
+          <i class="bi bi-person" style="font-size: 22px"></i>
+        </button>
       </div>
-</header>
 
-<!-- Sub Navbar Section (Desktop and Mobile) -->
-<nav class="navbar navbar-expand-lg py-1 sub-navbar">
-  <div class="container-fluid">
-      <!-- Sub Navbar links (only visible on larger screens) -->
-      <div class="collapse navbar-collapse d-none d-lg-block" id="navbarTogglerDemo02">
-          <ul class="navbar-nav me-auto mb-0 d-flex w-100 justify-content-center">
-              <li class="nav-item mx-2">
-                  <a class="nav-link py-0" routerLink="/home">Home</a>
-              </li>
-              <li class="nav-item mx-2">
-                  <a class="nav-link py-0" routerLink="/new-arrivals">New Arrivals</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link py-0" routerLink="/shop">Shop</a>
-            </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link py-0" routerLink="/accessories">Accessories</a>
-            </li>
-              <li class="nav-item mx-2">
-                  <a class="nav-link py-0" routerLink="/collaboration">Collaborations</a>
-              </li>
+      <a class="nav-link d-block d-lg-none" routerLink="/cart">
+        <i class="bi bi-cart" style="font-size: 22px"></i>
+      </a>
+    </div>
+  </header>
 
-          </ul>
+  <nav class="navbar navbar-expand-lg py-1 sub-navbar">
+    <div class="container-fluid">
+      <div
+        class="collapse navbar-collapse d-none d-lg-block"
+        id="navbarTogglerDemo02"
+      >
+        <ul class="navbar-nav me-auto mb-0 d-flex w-100 justify-content-center">
+          <li class="nav-item mx-2">
+            <a class="nav-link py-0" routerLink="/home">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link py-0" routerLink="/new-arrivals">New Arrivals</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link py-0" routerLink="/shop">Shop</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link py-0" routerLink="/accessories">Accessories</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link py-0" routerLink="/collaboration"
+              >Collaborations</a
+            >
+          </li>
+        </ul>
       </div>
-  </div>
-</nav>
+    </div>
+  </nav>
 </div>
-<!-- Offcanvas Menu for Mobile (Sub Navbar) -->
+
 <div
-  class="offcanvas offcanvas-end"
+  class="offcanvas offcanvas-start header-offcanvas-mobile"
   tabindex="-1"
   id="offcanvasResponsive"
   aria-labelledby="offcanvasResponsiveLabel"
 >
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">
-      <img src="logos/fc-flash-black.png" alt="Faded Chapter Logo" class="img-fluid" style="max-width: 72px;" />
+      <img
+        src="logos/fc-flash-black.png"
+        alt="Faded Chapter Logo"
+        class="img-fluid"
+        style="max-width: 72px"
+      />
     </h5>
     <button
       type="button"
@@ -94,42 +132,55 @@
     ></button>
   </div>
   <div class="offcanvas-body">
-    <!-- Search Box for Mobile (top of the offcanvas) -->
-    <div class="mb-3">
-      <input
-        class="form-control"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-    </div>
-
-    <!-- Sub Navbar Links (spaced from search box) -->
-    <ul class="navbar-nav mb-3 justify-content-center">
-      <!-- Centering the sub-nav items in the offcanvas -->
+    <lib-search class="offcanvas-search"></lib-search>
+    <ul class="navbar-nav mb-3 offcanvas-nav">
       <li class="nav-item">
-        <a class="nav-link py-0" routerLink="/home">Home</a>
+        <a class="nav-link" routerLink="/home" data-bs-dismiss="offcanvas"
+          >Home</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link py-0" routerLink="/shop">shop</a>
+        <a class="nav-link" routerLink="/shop" data-bs-dismiss="offcanvas"
+          >Shop</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link py-0" routerLink="/new-arrivals">New Arrivals</a>
+        <a
+          class="nav-link"
+          routerLink="/new-arrivals"
+          data-bs-dismiss="offcanvas"
+          >New Arrivals</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link py-0" routerLink="/accessories">Accessories</a>
+        <a
+          class="nav-link"
+          routerLink="/accessories"
+          data-bs-dismiss="offcanvas"
+          >Accessories</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link py-0" routerLink="/collaboration">Collaborations</a>
+        <a
+          class="nav-link"
+          routerLink="/collaboration"
+          data-bs-dismiss="offcanvas"
+          >Collaborations</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link py-0" routerLink="/about-us">About Us</a>
+        <a class="nav-link" routerLink="/about-us" data-bs-dismiss="offcanvas"
+          >About Us</a
+        >
       </li>
     </ul>
-
-    <!-- Wishlist and Login (moved to the bottom of the offcanvas with space) -->
-    <div class="d-flex flex-column mt-auto">
-      <a class="nav-link" routerLink="#">Login</a>
+    <div class="offcanvas-footer">
+      <button class="user-icon-button" aria-label="User Account">
+        <i class="bi bi-person"></i>
+      </button>
+      <a href="#" class="instagram-icon" aria-label="Instagram">
+        <i class="bi bi-instagram"></i>
+      </a>
     </div>
   </div>
 </div>
