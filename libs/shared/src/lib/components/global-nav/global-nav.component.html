@@ -69,7 +69,7 @@
           <i class="bi bi-cart" style="font-size: 22px"></i>
           <span class="badge bg-dark rounded-pill position-absolute" style="top: -8px; right: -8px;" *ngIf="itemCount > 0">{{ itemCount }}</span>
         </a>
-        <button class="nav-link px-3" routerLink="#">
+        <button class="nav-link px-3 position-relative" routerLink="/sign-up">
           <i class="bi bi-person" style="font-size: 22px"></i>
         </button>
       </div>
@@ -177,7 +177,7 @@
       </li>
     </ul>
     <div class="offcanvas-footer">
-      <button class="user-icon-button" aria-label="User Account">
+      <button routerLink="/sign-up" class="user-icon-button" aria-label="User Account">
         <i class="bi bi-person"></i>
       </button>
       <a href="#" class="instagram-icon" aria-label="Instagram">

@@ -1,4 +1,5 @@
 import { ExtraOptions, Route } from '@angular/router';
+import { LoginComponent, SignupComponent } from '@faded-chapter/auth';
 import {
   CollaborationsComponent,
   HomeComponent,
@@ -46,6 +47,10 @@ export const appRoutes: Route[] = [
   { path: 'size-guide', component: SizeGuideComponent },
   //User Experience Components
   { path: 'personalize-cookie', component: PersonalizeCookieComponent },
+  //Authentication Components
+  { path: 'sign-up', component: SignupComponent },
+  { path: 'log-in', component: LoginComponent },
+
   // Wild Card Routing
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
