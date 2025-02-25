@@ -1,37 +1,54 @@
 <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100">
-    <div class="row justify-content-center w-100">
-      <div class="col-md-8 col-lg-6 col-xl-5">
-        <div class="card shadow-lg p-4 rounded">
-          <div class="card-body">
-            <h2 class="text-center mb-4">Sign In</h2>
-            <form (ngSubmit)="onSubmit()">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+  <div class="row justify-content-center w-100">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+      <div class="card shadow-lg p-4 rounded">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Sign Up</h2>
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name">
+              <small class="text-danger" *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+                Name is required.
+              </small>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" formControlName="email">
+              <small class="text-danger" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                Enter a valid email.
+              </small>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <div class="input-group">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" formControlName="password">
+                <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                  <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                </button>
               </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
-                  <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" [(ngModel)]="password" name="password" required>
-                  <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
-                    <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember me</label>
-              </div>
-              <div *ngIf="errorMessage" class="alert alert-danger mb-3">{{ errorMessage }}</div>
-              <div class="d-grid">
-                <button type="submit" class="btn btn-dark">Sign Up</button>
-              </div>
-            </form>
-            <p class="text-center mt-3">
-              <a routerLink="/log-in" class="text-decoration-none">Already have an account? Login</a>
-            </p>
-          </div>
+              <small class="text-danger" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                Password must be at least 6 characters long.
+              </small>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mb-3">{{ errorMessage }}</div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-dark" [disabled]="isLoading">
+                {{ isLoading ? 'Signing Up...' : 'Sign Up' }}
+              </button>
+            </div>
+          </form>
+
+          <p class="text-center mt-3">
+            <a routerLink="/log-in" class="text-decoration-none">Already have an account? Login</a>
+          </p>
         </div>
       </div>
     </div>
   </div>
+</div>

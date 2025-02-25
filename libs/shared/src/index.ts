@@ -17,6 +17,7 @@ export * from './lib/models/cart-item/cart-item.interface'
 // Service
 export * from './lib/services/cart/cart.service'
 export * from './lib/services/wishlist/wishlist.service'
+export * from './lib/services/auth/auth.service'
 
 // Static Content
 export * from './lib/static-content/about-us/about-us.component'

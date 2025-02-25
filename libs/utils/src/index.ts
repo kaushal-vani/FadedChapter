@@ -28,3 +28,10 @@ export * from './lib/services/cookie-handler/cookie-handler.service'
 
 //Utils
 export * from './lib/utils/slugify.utils'
+
+
+//API Request and Response Interface
+export * from './lib/api/models/register/register-request.interface'
+export * from './lib/api/models/register/register-response.interface'
+export * from './lib/api/models/login/login-request.interface'
+export * from './lib/api/models/login/login-response.interface'
