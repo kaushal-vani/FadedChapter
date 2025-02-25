@@ -1,0 +1,102 @@
+.checkout-container {
+    padding: 1rem; /* Reduced padding for smaller screens */
+    max-width: 900px;
+    margin: auto;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #111;
+  }
+  
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem; /* Reduced margin */
+  }
+  
+  .timeline-step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+  }
+  
+  /* ... (Timeline step styles remain the same) ... */
+  
+  .checkout-content {
+    display: flex;
+    gap: 1rem; /* Reduced gap */
+  }
+  
+  .checkout-forms {
+    flex: 2;
+  }
+  
+  .order-summary {
+    flex: 1;
+  }
+  
+  .order-summary .card {
+    padding: 1rem;
+  }
+  
+  .order-summary .order-item {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 0.5rem; /* Reduced gap */
+    margin-bottom: 1rem;
+  }
+  
+  .order-summary .order-item img {
+    width: 60px; /* Reduced image size */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-summary .order-item div {
+    flex: 1; /* Allow details to take remaining space */
+  }
+  
+  /* ... (Button and form styles remain the same) ... */
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .checkout-content {
+      flex-direction: column; /* Stack forms and summary vertically */
+    }
+  
+    .order-summary {
+      width: 100%; /* Full width on smaller screens */
+    }
+  
+    .timeline {
+      flex-wrap: wrap; /*allows timeline to wrap on smaller screens*/
+    }
+    .timeline-step{
+        width: 50%;
+        margin-bottom: 1rem;
+    }
+    .timeline-step:nth-child(odd){
+        padding-right: 1rem;
+    }
+    .timeline-step:nth-child(even){
+        padding-left: 1rem;
+    }
+    .timeline-step:not(:last-child)::after {
+        display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .order-summary .order-item img {
+      width: 50px; /* Further reduce image size */
+    }
+    .timeline-step{
+        width: 100%;
+        padding: 0;
+    }
+  }
+  .order-summary div div{
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    flex-direction: column;
+  }

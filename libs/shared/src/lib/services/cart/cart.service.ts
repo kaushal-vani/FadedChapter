@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieHandlerService, Product } from '@faded-chapter/utils';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +9,19 @@ export class CartService {
   private cartItems = new BehaviorSubject<{ product: Product; size: string; quantity: number }[]>([]);
   cartItems$ = this.cartItems.asObservable();
 
-  private itemCountSubject = new BehaviorSubject<number>(0); // Add item count subject
-  itemCount$ = this.itemCountSubject.asObservable(); // Add item count observable
+  private itemCountSubject = new BehaviorSubject<number>(0);
+  itemCount$ = this.itemCountSubject.asObservable();
 
   private cartCookieName = 'cartItems';
 
   constructor(private cookieService: CookieHandlerService) {
     this.loadCartFromCookie();
-    this.updateItemCount(); // Initial update
+    this.updateItemCount();
+  }
+
+  // ✅ NEW: Getter method to retrieve cart items as observable
+  getCart(): Observable<{ product: Product; size: string; quantity: number }[]> {
+    return this.cartItems$;
   }
 
   addToCart(product: Product, size: string, quantity: number) {
@@ -37,7 +42,7 @@ export class CartService {
 
     this.cartItems.next([...currentCart]);
     this.saveCartToCookie();
-    this.updateItemCount(); // Update item count
+    this.updateItemCount();
   }
 
   removeFromCart(productId: string, size: string) {
@@ -47,7 +52,7 @@ export class CartService {
 
     this.cartItems.next(updatedCart);
     this.saveCartToCookie();
-    this.updateItemCount(); // Update item count
+    this.updateItemCount();
   }
 
   updateQuantity(productId: string, size: string, quantity: number, product: Product) {
@@ -63,12 +68,16 @@ export class CartService {
       item.quantity = Math.min(Math.max(1, quantity), selectedSize.stock);
       this.cartItems.next([...currentCart]);
       this.saveCartToCookie();
-      this.updateItemCount(); // Update item count
+      this.updateItemCount();
     }
   }
 
-  getCartItems() {
-    return this.cartItems.getValue();
+  // ✅ NEW: Method to get total price of cart items
+  getTotalPrice(): number {
+    return this.cartItems.getValue().reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
   }
 
   private loadCartFromCookie(): void {
@@ -81,7 +90,7 @@ export class CartService {
         this.cartItems.next([]);
       }
     }
-    this.updateItemCount(); // Update count after cookie load
+    this.updateItemCount();
   }
 
   private saveCartToCookie(): void {
