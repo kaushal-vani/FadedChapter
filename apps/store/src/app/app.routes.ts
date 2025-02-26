@@ -1,5 +1,9 @@
 import { ExtraOptions, Route } from '@angular/router';
-import { AuthGuard, LoginComponent, SignupComponent } from '@faded-chapter/auth';
+import {
+  AuthGuard,
+  LoginComponent,
+  SignupComponent,
+} from '@faded-chapter/auth';
 import {
   CollaborationsComponent,
   HomeComponent,
@@ -21,6 +25,10 @@ import {
   ProductOverviewComponent,
   WishlistComponent,
 } from '@faded-chapter/ui';
+import {
+  OrderHistoryComponent,
+  UserProfileComponent,
+} from '@faded-chapter/user-dashboard';
 
 export const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'top', // Scroll to the top when navigating to a new route
@@ -30,7 +38,6 @@ export const routerOptions: ExtraOptions = {
 export const appRoutes: Route[] = [
   // User Features
   { path: 'cart', component: CartComponent },
-  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] }, // Protected route
   // Pages
   { path: 'impact-by-color', component: ImpactByColorComponent },
   { path: 'collaboration', component: CollaborationsComponent },
@@ -50,6 +57,18 @@ export const appRoutes: Route[] = [
   // Authentication Components
   { path: 'sign-up', component: SignupComponent },
   { path: 'log-in', component: LoginComponent },
+  // Protected route - User Features
+  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'order-history',
+    component: OrderHistoryComponent,
+    canActivate: [AuthGuard],
+  },
   // Wild Card Routing
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
