@@ -1,10 +1,11 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { SearchComponent } from '@faded-chapter/utils';
-import { Subject, filter, takeUntil, Subscription } from 'rxjs';
+import { LoginResponse, SearchComponent } from '@faded-chapter/utils';
+import { Subject, filter, takeUntil } from 'rxjs';
 import { CartService } from '../../services/cart/cart.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'lib-global-nav',
@@ -13,67 +14,78 @@ import { CartService } from '../../services/cart/cart.service';
   styleUrl: './global-nav.component.scss',
 })
 export class GlobalNavComponent implements OnInit, OnDestroy {
+  isLoggedIn = false;
+  userName = '';
+  showDropdown = false;
   isSearchOpen = false;
-  itemCount = 0; // Add itemCount property
+  itemCount = 0
   private destroy$ = new Subject<void>();
-  private itemCountSubscription: Subscription | undefined; // Add subscription property
 
-  constructor(private router: Router, private cartService: CartService) { // Inject CartService
+  constructor(
+    private router: Router,
+    private cartService: CartService,
+    private authService: AuthService, // Inject AuthService
+    private cdr: ChangeDetectorRef
+  ) {
     this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        takeUntil(this.destroy$)
-      )
+      .pipe(filter((event) => event instanceof NavigationEnd), takeUntil(this.destroy$))
       .subscribe(() => {
         this.closeSearch();
       });
   }
 
   ngOnInit(): void {
-    this.itemCountSubscription = this.cartService.itemCount$.subscribe(
-      (count) => (this.itemCount = count)
-    );
+    // Subscribe to authentication changes
+    this.authService.user$.pipe(takeUntil(this.destroy$)).subscribe((user: LoginResponse | null) => {
+      this.isLoggedIn = !!user;
+      this.userName = user?.name || '';
+      this.cdr.detectChanges(); // Detect changes to update UI
+    });
+
+    // Subscribe to cart item count
+    this.cartService.itemCount$.pipe(takeUntil(this.destroy$)).subscribe((count) => {
+      this.itemCount = count;
+    });
   }
 
   toggleSearch() {
     this.isSearchOpen = !this.isSearchOpen;
-    this.updateHeaderVisibility();
+    this.cdr.detectChanges(); 
   }
 
   closeSearch() {
     this.isSearchOpen = false;
-    this.updateHeaderVisibility();
+    this.cdr.detectChanges(); 
   }
 
-  updateHeaderVisibility() {
-    const header = document.querySelector('.bg-light.sticky-top');
-    if (header) {
-      if (this.isSearchOpen) {
-        header.classList.add('search-active');
-      } else {
-        header.classList.remove('search-active');
-      }
-    }
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/log-in']);
   }
 
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+    this.cdr.detectChanges(); // Force update to show/hide dropdown
+  }
+
+  closeDropdown() {
+    this.showDropdown = false;
+    this.cdr.detectChanges();
+  }
+  
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
-    const searchBox = document.querySelector('.floating-search-container');
-    if (this.isSearchOpen && searchBox && !searchBox.contains(event.target as Node)) {
-      this.closeSearch();
+    const dropdownElement = document.querySelector('.dropdown-menu');
+    const profileElement = document.querySelector('.user-profile');
+    
+    if (this.showDropdown && dropdownElement && !dropdownElement.contains(event.target as Node) 
+        && profileElement && !profileElement.contains(event.target as Node)) {
+      this.closeDropdown();
     }
-  }
-
-  @HostListener('document:keydown.escape')
-  handleEscape() {
-    this.closeSearch();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-    if(this.itemCountSubscription){
-      this.itemCountSubscription.unsubscribe();
-    }
   }
 }

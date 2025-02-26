@@ -147,3 +147,33 @@ a {
     color: #333;
   }
 }
+
+.user-profile {
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%; /* Moves dropdown slightly downward */
+  right: 0; /* Align dropdown to the right */
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+  min-width: 160px;
+  padding: 10px 0;
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}

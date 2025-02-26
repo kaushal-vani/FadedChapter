@@ -1,4 +1,7 @@
 export interface LoginResponse {
-    token: string;
-    message: string;
-  }
+  _id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  token: string;
+}
