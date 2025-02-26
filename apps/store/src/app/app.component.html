@@ -1,4 +1,10 @@
+<div *ngIf="!isAdminPage">
 <lib-global-nav></lib-global-nav>
 <router-outlet></router-outlet>
 <lib-footer></lib-footer>
 <lib-cookie-consent></lib-cookie-consent>
+</div>
+
+<div *ngIf="isAdminPage">
+    <lib-admin-dashboard></lib-admin-dashboard>
+</div>
