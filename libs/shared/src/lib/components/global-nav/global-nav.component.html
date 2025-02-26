@@ -61,7 +61,7 @@
           <i class="bi bi-search" style="font-size: 22px"></i>
         </a>
       
-        <a class="nav-link px-3 position-relative" routerLink="/wishlist">
+        <a class="nav-link px-3 position-relative" *ngIf="isLoggedIn"  routerLink="/wishlist">
           <i class="bi bi-suit-heart" style="font-size: 22px"></i>
         </a>
         <a class="nav-link px-3 position-relative" routerLink="/cart">

@@ -3,5 +3,5 @@ export interface LoginResponse {
   name: string;
   email: string;
   isAdmin: boolean;
-  token: string;
+  authToken: string;
 }

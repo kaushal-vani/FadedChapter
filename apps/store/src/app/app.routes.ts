@@ -1,5 +1,5 @@
 import { ExtraOptions, Route } from '@angular/router';
-import { LoginComponent, SignupComponent } from '@faded-chapter/auth';
+import { AuthGuard, LoginComponent, SignupComponent } from '@faded-chapter/auth';
 import {
   CollaborationsComponent,
   HomeComponent,
@@ -28,10 +28,10 @@ export const routerOptions: ExtraOptions = {
 };
 
 export const appRoutes: Route[] = [
-  //User Features
+  // User Features
   { path: 'cart', component: CartComponent },
-  { path: 'wishlist', component: WishlistComponent },
-  //Pages
+  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] }, // Protected route
+  // Pages
   { path: 'impact-by-color', component: ImpactByColorComponent },
   { path: 'collaboration', component: CollaborationsComponent },
   { path: 'home', component: HomeComponent },
@@ -45,12 +45,11 @@ export const appRoutes: Route[] = [
   { path: 'refund-returns', component: RefundReturnsComponent },
   { path: 'shipping-payments', component: ShippingPaymentsComponent },
   { path: 'size-guide', component: SizeGuideComponent },
-  //User Experience Components
+  // User Experience Components
   { path: 'personalize-cookie', component: PersonalizeCookieComponent },
-  //Authentication Components
+  // Authentication Components
   { path: 'sign-up', component: SignupComponent },
   { path: 'log-in', component: LoginComponent },
-
   // Wild Card Routing
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

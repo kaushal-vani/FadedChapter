@@ -27,15 +27,30 @@ export class AuthService {
   login(userData: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, userData).pipe(
       tap((response) => {
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('authToken', response.authToken); // Store token with 'authToken'
         localStorage.setItem('user', JSON.stringify(response)); // Store user data
         this.userSubject.next(response); // Update BehaviorSubject
       })
     );
   }
 
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('authToken'); // Check for 'authToken'
+    return !!token; // Return true if token exists
+  }
+
+  // Save authentication token
+  setAuthToken(token: string): void {
+    localStorage.setItem('authToken', token);
+  }
+
+  // Get the authentication token
+  getAuthToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     localStorage.removeItem('user');
     this.userSubject.next(null);
   }
