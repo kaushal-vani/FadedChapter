@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminHeaderComponent } from '@faded-chapter/admin';
+import { AdminHeaderComponent, ProductManagementComponent } from '@faded-chapter/admin';
 
 @Component({
   selector: 'lib-admin-dashboard',
-  imports: [CommonModule, AdminHeaderComponent],
+  imports: [CommonModule, AdminHeaderComponent,ProductManagementComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
