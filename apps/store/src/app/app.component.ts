@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService, CookieConsentComponent, FooterComponent, GlobalNavComponent } from '@faded-chapter/shared';
 import { ScrollService } from '@faded-chapter/utils';
 
@@ -10,6 +10,16 @@ import { ScrollService } from '@faded-chapter/utils';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  constructor(private scrollService: ScrollService, public authService: AuthService) { }
+export class AppComponent implements OnInit {
+  constructor(public authService: AuthService, private router: Router,private scrollService: ScrollService,) {}
+
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate([this.router.url]);
+    }
+    if(this.authService.isAuthenticated()){
+      this.authService.logout(); 
+      this.router.navigate(['/login']);
+    }
+  }
 }
