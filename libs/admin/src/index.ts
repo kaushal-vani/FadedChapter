@@ -1,0 +1,1 @@
+export * from './lib/components/admin-header/admin-header.component'

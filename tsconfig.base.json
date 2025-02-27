@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@faded-chapter/admin": ["libs/admin/admin/src/index.ts"],
+      "@faded-chapter/admin": ["libs/admin/src/index.ts"],
       "@faded-chapter/auth": ["libs/auth/src/index.ts"],
       "@faded-chapter/feedback": ["libs/feedback/src/index.ts"],
       "@faded-chapter/pages": ["libs/pages/src/index.ts"],
