@@ -5,6 +5,7 @@ import {
   SignupComponent,
 } from '@faded-chapter/auth';
 import {
+  AdminDashboardComponent,
   CollaborationsComponent,
   HomeComponent,
   ImpactByColorComponent,
@@ -69,6 +70,8 @@ export const appRoutes: Route[] = [
     component: OrderHistoryComponent,
     canActivate: [AuthGuard],
   },
+  //Admin Dashboard - User Features
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AuthGuard], data: { isAdmin: true } },
   // Wild Card Routing
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

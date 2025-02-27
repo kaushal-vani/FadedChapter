@@ -45,9 +45,14 @@ export class LoginComponent {
     this.authService.login(loginData).subscribe({
       next: (response: LoginResponse) => {
         this.isLoading = false;
-        localStorage.setItem('authToken', response.authToken); // Store token for authentication
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'; // Check for returnUrl
-        this.router.navigate([returnUrl]); // Redirect to returnUrl or default '/'
+        localStorage.setItem('authToken', response.authToken);
+        localStorage.setItem('user', JSON.stringify(response));
+
+        if (response.isAdmin) {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/store']);
+        }
       },
       error: (error) => {
         this.isLoading = false;

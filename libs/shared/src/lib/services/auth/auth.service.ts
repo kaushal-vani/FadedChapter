@@ -11,7 +11,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:5001/api/auth';
 
   private userSubject = new BehaviorSubject<LoginResponse | null>(null);
-  user$ = this.userSubject.asObservable(); // Expose user data as observable
+  user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('user');
@@ -27,24 +27,22 @@ export class AuthService {
   login(userData: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, userData).pipe(
       tap((response) => {
-        localStorage.setItem('authToken', response.authToken); // Store token with 'authToken'
-        localStorage.setItem('user', JSON.stringify(response)); // Store user data
-        this.userSubject.next(response); // Update BehaviorSubject
+        localStorage.setItem('authToken', response.authToken);
+        localStorage.setItem('user', JSON.stringify(response));
+        this.userSubject.next(response);
       })
     );
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('authToken'); // Check for 'authToken'
-    return !!token; // Return true if token exists
+    const token = localStorage.getItem('authToken');
+    return !!token;
   }
 
-  // Save authentication token
   setAuthToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  // Get the authentication token
   getAuthToken(): string | null {
     return localStorage.getItem('authToken');
   }
@@ -53,5 +51,10 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
     this.userSubject.next(null);
+  }
+
+  isAdmin(): boolean {
+    const user = this.userSubject.value;
+    return !!user && !!user.isAdmin; // Check if user and isAdmin exist and are true
   }
 }
