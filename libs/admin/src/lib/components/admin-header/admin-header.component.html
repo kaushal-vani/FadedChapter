@@ -1,9 +1,8 @@
 <!-- Main Admin Header -->
+<!-- Main Admin Header -->
 <div class="bg-light sticky-top">
   <header class="py-3 main-header">
-    <div
-      class="container-fluid d-flex justify-content-between align-items-center"
-    >
+    <div class="container-fluid d-flex justify-content-between align-items-center">
       <!-- Mobile Menu Button -->
       <button
         class="navbar-toggler d-block d-lg-none"
@@ -20,121 +19,48 @@
       </button>
 
       <!-- Logo -->
-      <a class="navbar-brand mx-auto mx-lg-0" routerLink="/admin">
-        <img
-          src="logos/fc-fallen-angel.png"
-          alt="Admin Dashboard Logo"
-          class="img-fluid"
-          style="max-width: 88px"
-        />
+      <a class="navbar-brand" routerLink="/admin">
+        <img src="logos/fc-fallen-angel.png" alt="Admin Dashboard Logo" class="img-fluid" style="max-width: 60px" />
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="d-none d-lg-flex align-items-center">
-        <a class="nav-link px-3" routerLink="/admin/analytics">Analytics</a>
-        <a class="nav-link px-3" routerLink="/admin/orders">Orders</a>
-        <a class="nav-link px-3" routerLink="/admin/products">Products</a>
-        <a class="nav-link px-3" routerLink="/admin/users">Users</a>
+      <div class="d-none d-lg-flex align-items-center flex-grow-1 justify-content-center nav-center">
+        <a class="nav-link px-4" routerLink="/admin/analytics">Analytics</a>
+        <a class="nav-link px-4" routerLink="/admin/orders">Orders</a>
+        <a class="nav-link px-4" routerLink="/admin/products">Products</a>
+        <a class="nav-link px-4" routerLink="/admin/users">Users</a>
+      </div>
 
-        <!-- Profile with Dropdown -->
-        <div class="nav-link px-3 user-profile position-relative">
-          <a
-            class="dropdown-item"
-            (click)="logout()"
-            (keydown.enter)="logout()"
-            tabindex="0"
-            role="button"
-            aria-label="Log Out"
-            >Log Out</a
-          >
-        </div>
+      <!-- Logout Button (separate to the right) -->
+      <div class="d-none d-lg-block logout-container">
+        <a class="dropdown-item logout-btn" (click)="logout()" (keydown.enter)="logout()" tabindex="0" role="button"
+          aria-label="Log Out">Log Out</a>
       </div>
     </div>
   </header>
 </div>
 
+
 <!-- Mobile Offcanvas Menu -->
-<div
-  class="offcanvas offcanvas-start"
-  tabindex="-1"
-  id="adminOffcanvas"
-  aria-labelledby="adminOffcanvasLabel"
->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="adminOffcanvas" aria-labelledby="adminOffcanvasLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="adminOffcanvasLabel">
-      <img
-        src="logos/fc-fallen-angel.png"
-        alt="Admin Dashboard Logo"
-        class="img-fluid"
-        style="max-width: 72px"
-      />
-      Admin Dashboard
+      <img src="logos/fc-fallen-angel.png" alt="Admin Dashboard Logo" class="img-fluid" style="max-width: 60px" />
     </h5>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <ul class="navbar-nav mb-3">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin" data-bs-dismiss="offcanvas"
-          >Dashboard</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/analytics"
-          data-bs-dismiss="offcanvas"
-          >Analytics</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/orders"
-          data-bs-dismiss="offcanvas"
-          >Orders</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/products"
-          data-bs-dismiss="offcanvas"
-          >Products</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/users"
-          data-bs-dismiss="offcanvas"
-          >Users</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/settings"
-          data-bs-dismiss="offcanvas"
-          >Settings</a
-        >
-      </li>
+    <ul class="navbar-nav offcanvas-nav">
+      <li class="nav-item"><a class="nav-link" routerLink="/admin" data-bs-dismiss="offcanvas">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/analytics" data-bs-dismiss="offcanvas">Analytics</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/orders" data-bs-dismiss="offcanvas">Orders</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/products" data-bs-dismiss="offcanvas">Products</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/users" data-bs-dismiss="offcanvas">Users</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/settings" data-bs-dismiss="offcanvas">Settings</a></li>
     </ul>
     <div class="offcanvas-footer">
-      <a
-      class="dropdown-item"
-      (click)="logout()"
-      (keydown.enter)="logout()"
-      tabindex="0"
-      role="button"
-      aria-label="Log Out"
-      >Log Out</a
-    >
+      <a class="dropdown-item logout-btn" (click)="logout()" (keydown.enter)="logout()" tabindex="0" role="button"
+        aria-label="Log Out">Log Out</a>
     </div>
   </div>
 </div>

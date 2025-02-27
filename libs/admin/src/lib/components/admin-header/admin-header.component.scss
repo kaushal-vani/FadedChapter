@@ -1,78 +1,59 @@
-.navbar {
-    padding-top: 5px;
-    padding-bottom: 5px;
+/* Center desktop navigation */
+.nav-center {
+    display: flex;
+    justify-content: center;
+    gap: 2rem; // Spacing between nav items
   }
   
-  .navbar-nav .nav-item .nav-link {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    font-size: 14px;
+  /* Logout button aligned to the right */
+  .logout-container {
+    margin-left: auto; // Pushes logout to the right
   }
   
-  .sub-navbar {
-    transition: background-color 0.3s ease, color 0.3s ease;
+  /* Logout button styling */
+  .logout-btn {
+    color: red;
+    font-weight: 600;
+    padding: 10px 15px;
+    display: block;
   }
   
-  a {
-    cursor: pointer;
-  }
-  
-  .offcanvas-body {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding-top: 2rem;
-    padding-bottom: 5rem; /* Add padding at the bottom for footer */
-  }
-  
-  .offcanvas-search {
-    margin-bottom: 2rem;
-    padding: 0 2rem;
-  }
-  
+  /* Offcanvas Navigation */
   .offcanvas-nav {
     list-style: none;
-    padding: 0 2.5rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; // Spacing between items
   
-    li {
-      margin-bottom: 1.8rem;
-      text-align: center; /* Ensure left alignment */
+    .nav-item {
+      text-align: left;
   
-      a {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      .nav-link {
         font-size: 1.15rem;
         font-weight: 500;
         display: block;
         border-radius: 10px;
-        transition: background-color 0.2s ease;
+        padding: 12px 15px;
         color: #333;
         text-decoration: none;
-        text-align: left; /* Explicitly align text to the left */
-        width: 100%; /* Ensure the anchor tag takes up the full width */
+        transition: background-color 0.2s ease;
       }
   
-      &:hover a {
+      &:hover .nav-link {
         background-color: rgba(0, 0, 0, 0.08);
       }
   
-      &:active a {
+      &:active .nav-link {
         background-color: rgba(0, 0, 0, 0.15);
       }
     }
   }
   
-  
-  .header-offcanvas-mobile {
-    width: 80%;
-  }
-  
+  /* Offcanvas Footer */
   .offcanvas-footer {
-    position: absolute;
-    bottom: 2rem;
-    left: 2.5rem;
-    width: calc(85% - 5rem);
-    display: flex;
-    justify-content: space-between; /* Align to start */
-    align-items: center;
+    margin-top: 2rem;
+    text-align: left;
+    padding: 1rem;
   }
   
