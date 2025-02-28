@@ -16,11 +16,12 @@
     <lib-product-card-skeleton-loader *ngFor="let _ of skeletonCountArray"></lib-product-card-skeleton-loader>
   </ng-container>
 
-  <!-- Show products once loaded -->
+  <!-- Show all products once loaded -->
   <ng-template #productList>
-    <lib-product-card *ngFor="let product of filteredProducts" [product]="product"></lib-product-card>
+    <lib-product-card *ngFor="let product of displayedProducts" [product]="product"></lib-product-card>
   </ng-template>
 </div>
 
+<!-- Filter & Sort Components -->
 <lib-filter (filterChange)="applyFilters()"></lib-filter>
 <lib-sort (sortChange)="applySort($event)"></lib-sort>

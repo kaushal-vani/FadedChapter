@@ -1,21 +1,27 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { FilterComponent, FilterService, Product, ProductMock, SortComponent } from '@faded-chapter/utils';
+import { FilterComponent, FilterService, Product, ProductService, SortComponent } from '@faded-chapter/utils';
 import { ProductCardComponent } from '@faded-chapter/ui';
 import { ProductCardSkeletonLoaderComponent } from '@faded-chapter/shared';
 
 @Component({
   selector: 'lib-shop',
+  standalone: true,
   imports: [CommonModule, FilterComponent, SortComponent, ProductCardSkeletonLoaderComponent, ProductCardComponent],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  products: Product[] = ProductMock;
-  filteredProducts: Product[] = [...this.products];
-  skeletonCountArray: number[] = []; // Skeleton loader placeholders
-  isLoading = true; // Initial loading state
+  products: Product[] = [];
+  displayedProducts: Product[] = [];
+  skeletonCountArray: number[] = [];
+  isLoading = true;
 
   @ViewChild(FilterComponent) filterComponent!: FilterComponent;
   @ViewChild(SortComponent) sortComponent!: SortComponent;
@@ -23,22 +29,14 @@ export class ShopComponent implements OnInit {
   constructor(
     private cdRef: ChangeDetectorRef,
     private router: Router,
-    private filterService: FilterService // Inject filter service
+    private filterService: FilterService,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.filteredProducts = [...this.products];
+    this.fetchProducts();
 
-    setTimeout(() => {
-      this.updateSkeletonCount();
-      this.isLoading = false;
-      this.cdRef.detectChanges();
-    }, 1000);
-
-    this.updateSkeletonCount();
-
-    // Listen for route changes and reset filters
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.resetFilters();
@@ -46,32 +44,28 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  fetchProducts(): void {
+    this.productService.getAllProducts().subscribe(response => {
+      console.log("Products received:", response);
+      this.products = response.products;
+      this.applyFilters();
+      this.isLoading = false;
+      this.cdRef.detectChanges();
+    });
+  }
+
   resetFilters(): void {
-    this.filterService.resetFilters(); // Reset filters in service
-    this.filteredProducts = [...this.products]; // Show all products
+    this.filterService.resetFilters();
+    this.applyFilters();
     this.cdRef.detectChanges();
-  }
-
-  updateSkeletonCount(): void {
-    const defaultSkeletonCount = 8;
-    this.skeletonCountArray = new Array(defaultSkeletonCount).fill(0);
-  }
-
-  openFilter(): void {
-    this.filterComponent?.openFilter();
-  }
-
-  openSort(): void {
-    this.sortComponent?.openSort();
   }
 
   applyFilters(): void {
     this.isLoading = true;
-
     setTimeout(() => {
-      this.filteredProducts = this.products.filter((product) => {
+      const filters = this.filterComponent?.selectedFilters;
+      this.displayedProducts = this.products.filter((product) => {
         let matches = true;
-        const filters = this.filterComponent.selectedFilters;
 
         if (filters.category?.length) {
           matches = matches && filters.category.includes(product.category);
@@ -83,9 +77,6 @@ export class ShopComponent implements OnInit {
           matches = matches && filters.size.some(
             (selectedSize) => product.size.some((s) => s.size === selectedSize)
           );
-        }
-        if (filters.fitType?.length) {
-          matches = matches && filters.fitType.includes(product.fitType);
         }
         if (filters.color?.length) {
           matches = matches && filters.color.includes(product.color);
@@ -104,44 +95,36 @@ export class ShopComponent implements OnInit {
         return matches;
       });
 
-      this.updateSkeletonCount();
       this.isLoading = false;
-    }, 1000);
+      this.cdRef.detectChanges();
+    }, 500);
   }
 
   applySort(sortData: { sortOption: string; sortOrder: string }): void {
     const { sortOption, sortOrder } = sortData;
     this.isLoading = true;
-  
+
     setTimeout(() => {
-      // Recalculate in-stock status dynamically based on size selection
-      if (sortOption === 'In Stock') {
-        this.filteredProducts = this.filteredProducts.sort((a, b) => {
-          const selectedSize = this.filterService.getSelectedSize();
-  
-          const stockA = selectedSize
-            ? a.size.find((s) => s.size === selectedSize)?.stock || 0
-            : a.size.reduce((acc, s) => acc + s.stock, 0);
-  
-          const stockB = selectedSize
-            ? b.size.find((s) => s.size === selectedSize)?.stock || 0
-            : b.size.reduce((acc, s) => acc + s.stock, 0);
-  
-          return stockB - stockA; // Sort descending by stock count
-        });
-      } else if (sortOption === 'Price: Low to High') {
-        this.filteredProducts = this.filteredProducts.sort((a, b) => a.price - b.price);
+      if (sortOption === 'Price: Low to High') {
+        this.displayedProducts.sort((a, b) => a.price - b.price);
       } else if (sortOption === 'Price: High to Low') {
-        this.filteredProducts = this.filteredProducts.sort((a, b) => b.price - a.price);
-      } 
-      // Apply sorting order (Ascending / Descending)
-      if (sortOrder === 'Out Of Stock') {
-        this.filteredProducts.reverse();
+        this.displayedProducts.sort((a, b) => b.price - a.price);
       }
-  
-      this.updateSkeletonCount();
+
+      if (sortOrder === 'Out Of Stock') {
+        this.displayedProducts.reverse();
+      }
+
       this.isLoading = false;
-    }, 1000);
+      this.cdRef.detectChanges();
+    }, 500);
   }
-  
+
+  openFilter(): void {
+    this.filterComponent?.openFilter();
+  }
+
+  openSort(): void {
+    this.sortComponent?.openSort();
+  }
 }

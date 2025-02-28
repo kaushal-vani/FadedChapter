@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
-import { of, Observable, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { ProductMock } from '../../mocks/product/product.mock';
+import { Observable } from 'rxjs';
 import { Product } from '../../models/product/product.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
+  private baseUrl = 'http://localhost:5001/api/products'; // Update with your backend URL
 
+  constructor(private http: HttpClient) {}
+
+  // Fetch all products
+  getAllProducts(): Observable<{ products: Product[] }> {
+    return this.http.get<{ products: Product[] }>(`${this.baseUrl}?all=true`);
+  }  
+
+  // Fetch a single product by ID
   getProductById(id: string): Observable<Product> {
-    const product = ProductMock.find(p => p.id === id);
-    return this.handleProduct(product, 'id'); // Use a common handler
+    return this.http.get<Product>(`${this.baseUrl}/${id}`);
   }
 
+  // Fetch a single product by slug
   getProductBySlug(slug: string): Observable<Product> {
-    const product = ProductMock.find(p => p.slug === slug);
-    return this.handleProduct(product, 'slug'); // Use a common handler
-  }
-
-  private handleProduct(product: Product | undefined, identifierType: 'id' | 'slug'): Observable<Product> {
-    if (product) {
-      return of(product).pipe(delay(500)); // Simulate API call with delay
-    } else {
-      const errorMessage = identifierType === 'id' ? 'Product ID' : 'Product Slug';
-      return throwError(() => new Error(`${errorMessage} not found`));
-    }
+    return this.http.get<Product>(`${this.baseUrl}/slug/${slug}`);
   }
 }
