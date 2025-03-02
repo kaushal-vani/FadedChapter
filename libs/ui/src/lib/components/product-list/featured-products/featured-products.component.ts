@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product, ProductMock } from '@faded-chapter/utils';
+import { Product } from '@faded-chapter/utils';
 import { ProductCardComponent } from '../../product-card/product-card.component';
 import { ProductCardSkeletonLoaderComponent } from '@faded-chapter/shared';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'lib-featured-products',
@@ -10,19 +11,27 @@ import { ProductCardSkeletonLoaderComponent } from '@faded-chapter/shared';
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.scss',
 })
-export class FeaturedProductsComponent {
-  featuredProducts: Product[] = []; // Explicitly type as Product[]
+export class FeaturedProductsComponent implements OnInit {
+  featuredProducts: Product[] = [];
   isLoading = true;
-  skeletonCount = 0;
+  skeletonCount = 4; // Default skeleton count
 
-  constructor() {
-    // Get skeleton count dynamically based on available featured products
-    const allFeaturedProducts = ProductMock.filter(product => product.isFeatured);
-    this.skeletonCount = allFeaturedProducts.length;
+  constructor(private http: HttpClient) {}
 
-    setTimeout(() => {
-      this.featuredProducts = allFeaturedProducts;
-      this.isLoading = false;
-    }, 1000);
+  ngOnInit() {
+    this.fetchFeaturedProducts();
+  }
+
+  fetchFeaturedProducts() {
+    this.http.get<Product[]>('http://localhost:5001/api/products/featured').subscribe({
+      next: (products) => {
+        this.featuredProducts = products;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching featured products:', error);
+        this.isLoading = false;
+      }
+    });
   }
 }
